@@ -23,11 +23,7 @@ public class DirectDetection : MonoBehaviour
 
             if (targetObject.CompareTag("Player"))
             {
-                parentManager.chasePlayer = true;
-            }
-            else
-            {
-                parentManager.chasePlayer = false;
+                parentManager.chaseTarget = true;
             }
         }
 

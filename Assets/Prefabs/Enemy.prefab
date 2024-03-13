@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4330763701158792187}
   - component: {fileID: 8931365490324330645}
   - component: {fileID: 6548329366583617}
-  - component: {fileID: 6144866332043173684}
   m_Layer: 7
   m_Name: FOV
   m_TagString: Untagged
@@ -80,21 +79,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e171b9dc74f044a4a9e0b998547d471a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimerMax: 0
+  SusTimer: 0
+  MaxTimer: 1
   targetTag1: 4
   targetTag2: 4
---- !u!114 &6144866332043173684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3979714076020028604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb08a38679119ae4db4dede9a26e4e93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4245100316290504330
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,6 +95,9 @@ GameObject:
   - component: {fileID: 725003723784191046}
   - component: {fileID: 1013116064743332938}
   - component: {fileID: 316561263611897292}
+  - component: {fileID: 8960922277779583769}
+  - component: {fileID: 3500643630783539781}
+  - component: {fileID: 3111244272724896514}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -240,4 +231,69 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   possessed: 1
-  chasePlayer: 0
+  chaseTarget: 0
+  initialPosition: {x: 0, y: 0, z: 0}
+--- !u!114 &8960922277779583769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4245100316290504330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb08a38679119ae4db4dede9a26e4e93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerTarget: {fileID: 3979714076020028604}
+  SusChase: 0
+  PlayerChase: 0
+--- !u!195 &3500643630783539781
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4245100316290504330}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!50 &3111244272724896514
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4245100316290504330}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

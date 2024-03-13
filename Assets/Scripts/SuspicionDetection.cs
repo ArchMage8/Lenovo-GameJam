@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SuspicionDetection : MonoBehaviour
@@ -8,9 +9,13 @@ public class SuspicionDetection : MonoBehaviour
     private GameObject targetObject;
     private EnemyManager enemyManager;
     private EnemyManager parentManager;
+    private ChasePlayer chasePlayer;
 
-    private float SusTimer = 0f;
-    [SerializeField] private float TimerMax = 5f;
+    private bool Watched;
+
+    [SerializeField] private float SusTimer = 0f;
+    [SerializeField] private float MaxTimer = 10f;
+    
 
     public enum TagOption
     {
@@ -28,6 +33,7 @@ public class SuspicionDetection : MonoBehaviour
     {
        fieldOfView = GetComponent<FieldOfView>();
        parentManager = GetComponentInParent<EnemyManager>();
+       chasePlayer = GetComponentInParent<ChasePlayer>();
 
     }
 
@@ -35,31 +41,71 @@ public class SuspicionDetection : MonoBehaviour
     {
         if (fieldOfView.targetObject != null)
         {
+            
             targetObject = fieldOfView.targetObject;
             if (targetObject.tag == targetTag1.ToString() || targetObject.tag == targetTag2.ToString()) 
             {
                 
                 enemyManager = targetObject.GetComponent<EnemyManager>();
 
-                if (enemyManager.possessed)
+                if(enemyManager.possessed == true)
                 {
-                    Debug.Log("Suspicion Logic");
                     SusTimer += Time.deltaTime;
+                    Watched = true;
 
-                    if (SusTimer >= TimerMax)
+                    parentManager.chaseTarget = true;
+                    chasePlayer.SusChase = true;
+                    Debug.Log("Sus Logic");
+
+                    if (SusTimer >= MaxTimer)
                     {
-                        parentManager.chasePlayer = true;
+                        
+
+                        chasePlayer.SusChase = false;
+                       chasePlayer.PlayerChase = true;
+                        Debug.Log("Chase Logic");
+
                     }
-                    else
-                    {
-                        parentManager.chasePlayer = false;
-                    }
+                   
                 }
                 else
                 {
-                    SusTimer = 0f;
+                    if(Watched == true)
+                    {
+                        chasePlayer.PlayerChase = true;
+                        Debug.Log("Chase after depossessed");
+                    }
                 }
             }
+           
+        }
+        else
+        {
+            if (Watched)
+            {
+                StartCoroutine(LoseInterest());
+            }
+        }
+
+        
+       
+    }
+
+    private IEnumerator LoseInterest()
+    {
+        if (fieldOfView.targetObject == null)
+        {
+           
+            yield return new WaitForSeconds(5f);
+            Debug.Log("Lost interest");
+            Watched = false;
+            chasePlayer.SusChase = false;
+            chasePlayer.PlayerChase = false;
+
+        }
+        else
+        {
+            
         }
     }
 }
