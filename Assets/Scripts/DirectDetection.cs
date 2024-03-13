@@ -7,11 +7,13 @@ public class DirectDetection : MonoBehaviour
     private FieldOfView fieldOfView;
     private GameObject targetObject;
     private EnemyManager parentManager;
+    private ChasePlayer chasePlayer;
 
     private void Awake()
     {
         fieldOfView = GetComponent<FieldOfView>();
         parentManager = GetComponentInParent<EnemyManager>();
+        chasePlayer = GetComponentInParent<ChasePlayer>();
 
     }
 
@@ -23,6 +25,8 @@ public class DirectDetection : MonoBehaviour
 
             if (targetObject.CompareTag("Player"))
             {
+                Debug.Log("Player Detect");
+                chasePlayer.PlayerChase = true;
                 parentManager.chaseTarget = true;
             }
         }
