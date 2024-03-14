@@ -18,14 +18,13 @@ public class FieldOfView : MonoBehaviour
     public GameObject targetObject;
     private GameObject ParentObject;
 
-    private EnemyManager enemyManager;
-
+   
     public bool CanSeeTarget { get; private set; }
 
     private void Start()
     {
         StartCoroutine(FOVCheck());
-        enemyManager = GetComponentInParent<EnemyManager>();
+       
     }
 
 

@@ -4,26 +4,11 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    public bool possessed = false;
-    public bool chaseTarget = false;
-    public Vector3 initialPosition;
-
-    private SuspicionDetection suspicionDetection;
-    private DirectDetection directDetection;
+    public bool isPossessed;
+    private Vector3 initialPosition;
 
     private void Awake()
     {
         initialPosition = transform.position;
-        suspicionDetection = GetComponentInChildren<SuspicionDetection>();
-        directDetection = GetComponentInChildren<DirectDetection>();
-
-        
-    }
-
-    private void Update()
-    {
-       
-
-      
     }
 }
