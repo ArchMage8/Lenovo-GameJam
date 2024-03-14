@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     public bool isPossessed;
-    private Vector3 initialPosition;
+    public Vector3 initialPosition;
 
     private void Awake()
     {
