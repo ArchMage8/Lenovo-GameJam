@@ -44,6 +44,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""mindControl"",
+                    ""type"": ""Button"",
+                    ""id"": ""d89c2a45-5992-432a-9674-ee2e322e40f6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -123,6 +132,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dc898f5c-3ab2-499e-922b-26220b9b1027"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""mindControl"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""afcfd162-da08-48be-87d2-0c4311b6bddd"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""mindControl"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -161,6 +192,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Control = asset.FindActionMap("Control", throwIfNotFound: true);
         m_Control_movement = m_Control.FindAction("movement", throwIfNotFound: true);
         m_Control_aim = m_Control.FindAction("aim", throwIfNotFound: true);
+        m_Control_mindControl = m_Control.FindAction("mindControl", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -224,12 +256,14 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private List<IControlActions> m_ControlActionsCallbackInterfaces = new List<IControlActions>();
     private readonly InputAction m_Control_movement;
     private readonly InputAction m_Control_aim;
+    private readonly InputAction m_Control_mindControl;
     public struct ControlActions
     {
         private @PlayerControls m_Wrapper;
         public ControlActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @movement => m_Wrapper.m_Control_movement;
         public InputAction @aim => m_Wrapper.m_Control_aim;
+        public InputAction @mindControl => m_Wrapper.m_Control_mindControl;
         public InputActionMap Get() { return m_Wrapper.m_Control; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -245,6 +279,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @aim.started += instance.OnAim;
             @aim.performed += instance.OnAim;
             @aim.canceled += instance.OnAim;
+            @mindControl.started += instance.OnMindControl;
+            @mindControl.performed += instance.OnMindControl;
+            @mindControl.canceled += instance.OnMindControl;
         }
 
         private void UnregisterCallbacks(IControlActions instance)
@@ -255,6 +292,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @aim.started -= instance.OnAim;
             @aim.performed -= instance.OnAim;
             @aim.canceled -= instance.OnAim;
+            @mindControl.started -= instance.OnMindControl;
+            @mindControl.performed -= instance.OnMindControl;
+            @mindControl.canceled -= instance.OnMindControl;
         }
 
         public void RemoveCallbacks(IControlActions instance)
@@ -294,5 +334,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
+        void OnMindControl(InputAction.CallbackContext context);
     }
 }
