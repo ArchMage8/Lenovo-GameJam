@@ -742,7 +742,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementManager: {fileID: 139544193}
   target: {fileID: 0}
-  smoothSpeed: 0.125
+  smoothSpeed: 5
 --- !u!1 &2081334218 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7754948584001177960, guid: 8cd7830be16b3e94b8ab2a954072245f, type: 3}

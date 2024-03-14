@@ -6,7 +6,7 @@ public class cameraMovement : MonoBehaviour
 {
     [SerializeField] movementManager movementManager;
     public Transform target;
-    public float smoothSpeed = -5f;
+    public float smoothSpeed = 0.1f;
 
     void FixedUpdate()
     {
