@@ -21,6 +21,8 @@ public class movementManager : MonoBehaviour
     public bool usingController;
     public bool isMindControl;
 
+    private EnemyManager enemyManager;
+
     private void Awake() 
     {
         input = new PlayerControls();
@@ -53,9 +55,14 @@ public class movementManager : MonoBehaviour
     {
         if(!isMindControl && fieldOfView.targetObject != null)
         {
-                rb.velocity = new Vector2(0,0);
-                target = fieldOfView.targetObject;
-                isMindControl = true;
+       
+            enemyManager = target.GetComponent<EnemyManager>();
+            enemyManager.isPossessed = true;
+            rb.velocity = new Vector2(0, 0);
+            target = fieldOfView.targetObject;
+            isMindControl = true;
+            
+                
                 
         }
         else
@@ -63,6 +70,7 @@ public class movementManager : MonoBehaviour
                 rb.velocity = new Vector2(0,0);
                 target = player;
                 isMindControl = false;
+                enemyManager.isPossessed = false;
         }
         
     }

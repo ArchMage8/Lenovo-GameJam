@@ -45,13 +45,12 @@ public class DetectionSystem : MonoBehaviour
 
             if (TargetObject.CompareTag("Player"))
             {
-                
+               
                 enemyMovement.Transform_Movement(TargetObject.transform);
             }
 
             else if (TargetObject.tag == targetTag1.ToString() || TargetObject.tag == targetTag2.ToString())
             {
-                hunting = true;
                 
                 enemyManager = TargetObject.GetComponent<EnemyManager>();
 
@@ -67,13 +66,13 @@ public class DetectionSystem : MonoBehaviour
             
         }
 
-        else if(fieldOfView.targetObject == null && hasBeenCalled && !hunting)
+        else if(fieldOfView.targetObject == null && hasBeenCalled)
         {
             if (!suspicionBool)
             {
                
                 enemyMovement.Transform_Movement(transform);
-                StartCoroutine(WaitingAround());
+                StartCoroutine(QuickReturn());
             }
 
             hasBeenCalled = false;
@@ -97,6 +96,15 @@ public class DetectionSystem : MonoBehaviour
     {
         
         yield return new WaitForSeconds(25f);
+        
+        enemyMovement.Position_Movement(enemyManager.initialPosition);
+        suspicionBool = false;
+
+        hunting = false;
+    }private IEnumerator QuickReturn()
+    {
+        
+        yield return new WaitForSeconds(3f);
         
         enemyMovement.Position_Movement(enemyManager.initialPosition);
         suspicionBool = false;
