@@ -10,6 +10,9 @@ public class EnemyManager : MonoBehaviour
     private NavMeshAgent agent;
     private DetectionSystem detectionSystem;
 
+    public bool isChasing;
+    public bool isPatrolling;
+
     private void Awake()
     {
         initialPosition = transform.position;
@@ -18,7 +21,7 @@ public class EnemyManager : MonoBehaviour
     }
 
     private void Update()
-    {
+    {   
         if (isPossessed)
         {
             agent.enabled = false;  

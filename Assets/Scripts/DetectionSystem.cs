@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class DetectionSystem : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class DetectionSystem : MonoBehaviour
     private bool hasBeenCalled = false;
     private bool hunting = false;
     private float thispos;
+    private EnemyManager TargetManager;
+    private NavMeshAgent agent;
 
     private Vector3 tempvalue;
     public enum EnemyTags
@@ -34,80 +37,98 @@ public class DetectionSystem : MonoBehaviour
         enemyMovement = GetComponent<EnemyMovement>();
 
         PlayerObject = GameObject.Find("Player");
+        agent = GetComponent<NavMeshAgent>();
     }
 
     public void Update()
-    {   
-        if (fieldOfView.targetObject != null)
+    {
+        if (!enemyManager.isPossessed && agent.enabled)
         {
-            hasBeenCalled = true;
-            TargetObject = fieldOfView.targetObject;
-
-            if (TargetObject.CompareTag("Player"))
+            if (fieldOfView.targetObject != null)
             {
-               
-                enemyMovement.Transform_Movement(TargetObject.transform);
-            }
+                hasBeenCalled = true;
+                TargetObject = fieldOfView.targetObject;
 
-            else if (TargetObject.tag == targetTag1.ToString() || TargetObject.tag == targetTag2.ToString())
-            {
-                
-                enemyManager = TargetObject.GetComponent<EnemyManager>();
-
-                if (enemyManager.isPossessed)
+                if (TargetObject.CompareTag("Player"))
                 {
-                  
+
+                    //Debug.Log("Movement 1");
                     enemyMovement.Transform_Movement(TargetObject.transform);
-                    StartCoroutine(SusCheck());
-                    
+                    enemyManager.isChasing = true;
+                }
+
+                else if (TargetObject.tag == targetTag1.ToString() || TargetObject.tag == targetTag2.ToString())
+                {
+
+                    TargetManager = TargetObject.GetComponent<EnemyManager>();
+
+                    if (TargetManager.isPossessed)
+                    {
+                        //Debug.Log("Movement 2");
+                        enemyMovement.Transform_Movement(TargetObject.transform);
+                        StartCoroutine(SusCheck());
+
+                        suspicionBool = true;
+                        hunting = true;
+                        enemyManager.isChasing = true;
+
+                    }
                 }
             }
-
-            
-        }
-
-        else if(fieldOfView.targetObject == null && hasBeenCalled)
-        {
-            if (!suspicionBool)
+            else
             {
-               
-                enemyMovement.Transform_Movement(transform);
-                StartCoroutine(QuickReturn());
+                if (!hunting)
+                {
+                    if (hasBeenCalled)
+                    {
+                        if (suspicionBool)
+                        {
+                            //Debug.Log("Suspicion Return");
+                            hasBeenCalled = false;
+                            suspicionBool = false;
+                        }
+                        else
+                        {
+                            //Debug.Log("Direct Return");
+                            StartCoroutine(QuickReturn());
+                            hasBeenCalled = false;
+                        }
+                    }
+                }
             }
-
-            hasBeenCalled = false;
-        }
-
-      
-        
+        }   
     }
 
     private IEnumerator SusCheck()
     {
         yield return new WaitForSeconds(5f);
 
-
+        //Debug.Log("Movement 4");
         enemyMovement.Position_Movement(PlayerObject.transform.position);
         suspicionBool = true;
+
         StartCoroutine(WaitingAround());
     }
 
+   
     private IEnumerator WaitingAround()
     {
         
         yield return new WaitForSeconds(25f);
-        
-        enemyMovement.Position_Movement(enemyManager.initialPosition);
-        suspicionBool = false;
+
+        //Debug.Log("Movement 5");
+        enemyManager.isChasing = false;
 
         hunting = false;
-    }private IEnumerator QuickReturn()
+    }
+    private IEnumerator QuickReturn()
     {
         
         yield return new WaitForSeconds(3f);
-        
-        enemyMovement.Position_Movement(enemyManager.initialPosition);
-        suspicionBool = false;
+
+        //Debug.Log("Movement 6");
+        enemyManager.isChasing = false;
+
 
         hunting = false;
     }

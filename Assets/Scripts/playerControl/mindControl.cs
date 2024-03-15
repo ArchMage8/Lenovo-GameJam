@@ -7,6 +7,7 @@ public class mindControl : MonoBehaviour
 {
     [SerializeField] FieldOfView fieldOfView;
     [SerializeField] movementManager movementmanager;
+    private EnemyManager enemymanager;
 
     private PlayerControls input = null;
 
@@ -34,20 +35,32 @@ public class mindControl : MonoBehaviour
     }
     private void OnMindControllPerformed(InputAction.CallbackContext context)
     {
-        Debug.Log("T pressed");
-        if(!isMindControl && fieldOfView.targetObject != null)
-        {
-                movementmanager.rb.velocity = new Vector2(0,0);
+        
+            Debug.Log("T pressed");
+            if (!isMindControl)
+            {
+                if (fieldOfView.targetObject != null) { 
+                
+                movementmanager.rb.velocity = new Vector2(0, 0);
                 movementmanager.target = fieldOfView.targetObject;
                 isMindControl = true;
-                
-        }
-        else
-        {
-                movementmanager.rb.velocity = new Vector2(0,0);
-                movementmanager.target = movementmanager.player;
+
+                enemymanager = movementmanager.target.GetComponent<EnemyManager>();
+                enemymanager.isPossessed = true;
+            
+                }
+            }
+            else
+            {
+                movementmanager.rb.velocity = new Vector2(0, 0);
+               
                 isMindControl = false;
-        }
+
+                enemymanager.isPossessed = false;
+                enemymanager = null;
+                movementmanager.target = movementmanager.player;
+            }
+        
     }
     
     void Start(){

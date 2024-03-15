@@ -35,11 +35,17 @@ public class EnemyMovement : MonoBehaviour
 
     public void Transform_Movement(Transform target)
     {
-        agent.SetDestination(target.position);
+        if (agent.enabled)
+        {
+            agent.SetDestination(target.position);
+        }
     }
 
     public void Position_Movement(Vector3 target)
     {
-        agent.SetDestination(target);
+        if (agent.enabled)
+        {
+            agent.SetDestination(target);
+        }
     }
 }

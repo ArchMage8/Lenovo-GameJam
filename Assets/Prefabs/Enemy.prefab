@@ -68,6 +68,7 @@ GameObject:
   - component: {fileID: 3533128237531933309}
   - component: {fileID: 843339810785333437}
   - component: {fileID: 784476052855033418}
+  - component: {fileID: 7149825773735733524}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -200,6 +201,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPossessed: 0
   initialPosition: {x: 0, y: 0, z: 0}
+  isChasing: 0
+  isPatrolling: 0
 --- !u!114 &843339810785333437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,6 +230,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a3ff3a8a0792914a9176a7f254a3e80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7149825773735733524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4245100316290504330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01c8a873b57d09b4b86e276f039643b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkpoints: []
+  waitTime: 3
 --- !u!1 &7693887960346495001
 GameObject:
   m_ObjectHideFlags: 0
