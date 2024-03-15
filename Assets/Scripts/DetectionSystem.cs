@@ -18,6 +18,8 @@ public class DetectionSystem : MonoBehaviour
     private EnemyManager TargetManager;
     private NavMeshAgent agent;
 
+    public bool isChasingPlayer;
+
     private Vector3 tempvalue;
     public enum EnemyTags
     {
@@ -62,7 +64,7 @@ public class DetectionSystem : MonoBehaviour
 
                     TargetManager = TargetObject.GetComponent<EnemyManager>();
 
-                    if (TargetManager.isPossessed)
+                    if (TargetManager.isPossessed && !isChasingPlayer)
                     {
                         //Debug.Log("Movement 2");
                         enemyMovement.Transform_Movement(TargetObject.transform);
@@ -104,6 +106,7 @@ public class DetectionSystem : MonoBehaviour
         yield return new WaitForSeconds(5f);
 
         //Debug.Log("Movement 4");
+        isChasingPlayer = true;
         enemyMovement.Position_Movement(PlayerObject.transform.position);
         suspicionBool = true;
 
@@ -117,6 +120,8 @@ public class DetectionSystem : MonoBehaviour
         yield return new WaitForSeconds(25f);
 
         //Debug.Log("Movement 5");
+        isChasingPlayer = false;
+
         enemyManager.isChasing = false;
 
         hunting = false;
