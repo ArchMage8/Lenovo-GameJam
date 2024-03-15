@@ -69,8 +69,8 @@ public class movementManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        // rb.angularVelocity = 0;
         rb = target.GetComponent<Rigidbody2D>();
+        rb.angularVelocity = 0;
         rb.velocity = moveVector * speed;
 
         if (!usingController){

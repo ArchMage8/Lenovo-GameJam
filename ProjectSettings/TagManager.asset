@@ -17,7 +17,7 @@ TagManager:
   - UI
   - Obstruction
   - Enemy
-  - 
+  - Sprite
   - 
   - 
   - 
@@ -44,4 +44,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: floor
+    uniqueID: 1316710193
     locked: 0
