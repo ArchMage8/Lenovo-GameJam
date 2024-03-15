@@ -5,8 +5,6 @@ using UnityEngine.InputSystem;
 
 public class movementManager : MonoBehaviour
 {
-    [SerializeField] FieldOfView fieldOfView;
-
     private PlayerControls input = null;
     private Vector2 moveVector = Vector2.zero;
     private Vector2 aimVector = Vector2.zero;
@@ -14,12 +12,11 @@ public class movementManager : MonoBehaviour
     public GameObject player;
     public GameObject target;
 
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     
     public float speed = 5f;
 
     public bool usingController;
-    public bool isMindControl;
 
     private void Awake() 
     {
@@ -32,8 +29,6 @@ public class movementManager : MonoBehaviour
         input.Control.movement.performed += OnMovementPerformed;
         input.Control.movement.canceled += OnMovementCancelled;
 
-        input.Control.mindControl.performed+=OnMindControllPerformed;
-        
         input.Control.aim.performed += OnAimPerformed;
         input.Control.aim.canceled += OnAimCancelled;
     }
@@ -44,28 +39,10 @@ public class movementManager : MonoBehaviour
         input.Control.movement.performed -= OnMovementPerformed;
         input.Control.movement.canceled -= OnMovementCancelled;
 
-        input.Control.mindControl.performed-=OnMindControllPerformed;
-
         input.Control.aim.performed -= OnAimPerformed;
         input.Control.aim.canceled -= OnAimCancelled;
     }
-    private void OnMindControllPerformed(InputAction.CallbackContext context)
-    {
-        if(!isMindControl && fieldOfView.targetObject != null)
-        {
-                rb.velocity = new Vector2(0,0);
-                target = fieldOfView.targetObject;
-                isMindControl = true;
-                
-        }
-        else
-        {
-                rb.velocity = new Vector2(0,0);
-                target = player;
-                isMindControl = false;
-        }
-        
-    }
+
     private void OnAimPerformed(InputAction.CallbackContext value)
     {
         aimVector = value.ReadValue<Vector2>();
@@ -91,11 +68,10 @@ public class movementManager : MonoBehaviour
 
     void FixedUpdate()
     {
+        // rb.angularVelocity = 0;
         rb = target.GetComponent<Rigidbody2D>();
-
-        Debug.Log(fieldOfView.targetObject);
-        
         rb.velocity = moveVector * speed;
+
         if (!usingController){
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 direction = mousePosition - rb.position;

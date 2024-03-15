@@ -356,6 +356,10 @@ PrefabInstance:
       propertyPath: targetTag1
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1013116064743332938, guid: 02946cd7521c5cf4a8a5d8865649dc43, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1875561523666111837, guid: 02946cd7521c5cf4a8a5d8865649dc43, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -1517,6 +1521,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1497136925}
   - component: {fileID: 1497136924}
+  - component: {fileID: 1497136926}
   m_Layer: 0
   m_Name: MovementManager
   m_TagString: Untagged
@@ -1536,12 +1541,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 126c45833b37a9444885c7cd2d4d73ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fieldOfView: {fileID: 1180187063}
   player: {fileID: 1180187061}
   target: {fileID: 1180187061}
+  rb: {fileID: 0}
   speed: 5
   usingController: 1
-  isMindControl: 0
 --- !u!4 &1497136925
 Transform:
   m_ObjectHideFlags: 0
@@ -1557,6 +1561,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1497136926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497136923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4a5fec5c19013b4aa0bd08aef64e9d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fieldOfView: {fileID: 1180187063}
+  movementmanager: {fileID: 1497136924}
+  speed: 5
+  isMindControl: 0
 --- !u!1 &1687591877
 GameObject:
   m_ObjectHideFlags: 0
