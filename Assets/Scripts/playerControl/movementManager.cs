@@ -18,6 +18,8 @@ public class movementManager : MonoBehaviour
 
     public bool usingController;
 
+    private EnemyManager enemyManager;
+
     private void Awake() 
     {
         input = new PlayerControls();
@@ -42,7 +44,6 @@ public class movementManager : MonoBehaviour
         input.Control.aim.performed -= OnAimPerformed;
         input.Control.aim.canceled -= OnAimCancelled;
     }
-
     private void OnAimPerformed(InputAction.CallbackContext value)
     {
         aimVector = value.ReadValue<Vector2>();
