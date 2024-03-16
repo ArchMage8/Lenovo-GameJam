@@ -37,7 +37,6 @@ public class mindControl : MonoBehaviour
     private void OnMindControllPerformed(InputAction.CallbackContext context)
     {
         
-        Debug.Log("T pressed");
         if (!isMindControl && fieldOfView.targetObject != null)
         { 
             if(!enemymanager.isChasing){

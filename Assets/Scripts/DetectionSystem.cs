@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -19,6 +20,7 @@ public class DetectionSystem : MonoBehaviour
     private NavMeshAgent agent;
 
     public bool isChasingPlayer;
+    private bool test;
 
     private float tempvalue = float.PositiveInfinity;
     private Vector2 tempPos;
@@ -52,7 +54,8 @@ public class DetectionSystem : MonoBehaviour
 
         if (tempvalue <= maxRange)
         {
-            StartCoroutine(WaitingAround());
+            StartCoroutine(WaitingAround()); //Return post suspicion logic
+            test = false;
         }
 
         if (!enemyManager.isPossessed && agent.enabled)
@@ -64,47 +67,52 @@ public class DetectionSystem : MonoBehaviour
 
                 if (TargetObject.CompareTag("Player"))
                 {
-
+                    isChasingPlayer = true;
                     //Debug.Log("Movement 1");
                     enemyMovement.Transform_Movement(TargetObject.transform);
                     enemyManager.isChasing = true;
+                    hunting = false;
                 }
 
                 else if (TargetObject.tag == targetTag1.ToString() || TargetObject.tag == targetTag2.ToString())
                 {
-
+                    
                     TargetManager = TargetObject.GetComponent<EnemyManager>();
 
                     if (TargetManager.isPossessed && !isChasingPlayer)
                     {
-                        //Debug.Log("Movement 2");
+                        Debug.Log("Movement 2");
+                        enemyManager.isChasing = true;
                         enemyMovement.Transform_Movement(TargetObject.transform);
                         StartCoroutine(SusCheck());
                         
 
                         suspicionBool = true;
-                        hunting = true;
-                        enemyManager.isChasing = true;
+                        hunting = false;
+                        
 
                     }
                 }
             }
             else
             {
+               
                 if (!hunting)
                 {
                     if (hasBeenCalled)
                     {
                         if (suspicionBool)
                         {
-                            //Debug.Log("Suspicion Return");
+                           
+                            Debug.Log("Suspicion Return");
                             hasBeenCalled = false;
                             suspicionBool = false;
                         }
                         else
                         {
+                           
                             //Debug.Log("Direct Return");
-                            StartCoroutine(QuickReturn());
+                            //StartCoroutine(QuickReturn());
                             hasBeenCalled = false;
                         }
                     }
@@ -115,16 +123,36 @@ public class DetectionSystem : MonoBehaviour
 
     private IEnumerator SusCheck()
     {
-        yield return new WaitForSeconds(5f);
 
-        //Debug.Log("Movement 4");
-        isChasingPlayer = true;
-        enemyMovement.Position_Movement(PlayerObject.transform.position);
-        suspicionBool = true;
+        yield return new WaitForSeconds(3f);
 
-       tempPos = PlayerObject.transform.position;
+        if (!test)
+        {
+            if (fieldOfView.targetObject != null)
+            {
 
+                Debug.Log("Conditions met, chasing player");
+                enemyMovement.Position_Movement(PlayerObject.transform.position);
+                suspicionBool = true;
+
+                tempPos = PlayerObject.transform.position;
+                test = true;
+                enemyManager.isChasing = true;
+                isChasingPlayer = true;
+            }
+            else
+            {
+                Debug.Log("Returning to Patrol");
+                StartCoroutine(QuickReturn());
+                test = true;
+
+            }
+        }
         
+
+       
+
+       
     }
 
    
@@ -146,11 +174,12 @@ public class DetectionSystem : MonoBehaviour
         
         yield return new WaitForSeconds(3f);
 
-        //Debug.Log("Movement 6");
+        Debug.Log("Movement 6");
         enemyManager.isChasing = false;
 
-
+        isChasingPlayer = false;
         hunting = false;
         tempvalue = float.PositiveInfinity;
+        test = false;
     }
 }

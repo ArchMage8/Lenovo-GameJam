@@ -44,8 +44,6 @@ public class FieldOfView : MonoBehaviour
     {
         Collider2D[] rangeCheck = Physics2D.OverlapCircleAll(transform.position, radius, targetLayer);
 
-        Debug.Log(rangeCheck.Length);
-
         if (rangeCheck.Length == 2)
         {
             foreach (Collider2D col in rangeCheck)
