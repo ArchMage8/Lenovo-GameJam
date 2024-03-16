@@ -993,6 +993,10 @@ PrefabInstance:
       value: Scientist
       objectReference: {fileID: 0}
     - target: {fileID: 7149825773735733524, guid: 02946cd7521c5cf4a8a5d8865649dc43, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7149825773735733524, guid: 02946cd7521c5cf4a8a5d8865649dc43, type: 3}
       propertyPath: checkpoints.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -1709,6 +1713,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 843339810785333437, guid: 02946cd7521c5cf4a8a5d8865649dc43, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 843339810785333437, guid: 02946cd7521c5cf4a8a5d8865649dc43, type: 3}
       propertyPath: targetTag1
       value: 2
       objectReference: {fileID: 0}
@@ -1743,6 +1751,10 @@ PrefabInstance:
     - target: {fileID: 7149825773735733524, guid: 02946cd7521c5cf4a8a5d8865649dc43, type: 3}
       propertyPath: waitTime
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7149825773735733524, guid: 02946cd7521c5cf4a8a5d8865649dc43, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7149825773735733524, guid: 02946cd7521c5cf4a8a5d8865649dc43, type: 3}
       propertyPath: checkpoints.Array.size
@@ -2034,7 +2046,7 @@ MonoBehaviour:
   target: {fileID: 0}
   rb: {fileID: 0}
   speed: 5
-  usingController: 1
+  usingController: 0
 --- !u!4 &1497136925
 Transform:
   m_ObjectHideFlags: 0
@@ -2477,6 +2489,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 843339810785333437, guid: 02946cd7521c5cf4a8a5d8865649dc43, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1875561523666111837, guid: 02946cd7521c5cf4a8a5d8865649dc43, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -2495,11 +2511,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4245100316290504330, guid: 02946cd7521c5cf4a8a5d8865649dc43, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4245100316290504330, guid: 02946cd7521c5cf4a8a5d8865649dc43, type: 3}
       propertyPath: m_TagString
       value: Janitor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7149825773735733524, guid: 02946cd7521c5cf4a8a5d8865649dc43, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7149825773735733524, guid: 02946cd7521c5cf4a8a5d8865649dc43, type: 3}
       propertyPath: checkpoints.Array.size
@@ -2892,11 +2912,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4245100316290504330, guid: 02946cd7521c5cf4a8a5d8865649dc43, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4245100316290504330, guid: 02946cd7521c5cf4a8a5d8865649dc43, type: 3}
       propertyPath: m_TagString
       value: IT
+      objectReference: {fileID: 0}
+    - target: {fileID: 7149825773735733524, guid: 02946cd7521c5cf4a8a5d8865649dc43, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7149825773735733524, guid: 02946cd7521c5cf4a8a5d8865649dc43, type: 3}
       propertyPath: checkpoints.Array.size

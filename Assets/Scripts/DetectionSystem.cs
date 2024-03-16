@@ -112,7 +112,7 @@ public class DetectionSystem : MonoBehaviour
                         {
                            
                             //Debug.Log("Direct Return");
-                            //StartCoroutine(QuickReturn());
+                            StartCoroutine(QuickReturn());
                             hasBeenCalled = false;
                         }
                     }
