@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class mindControl : MonoBehaviour
 {
-    [SerializeField] FieldOfView fieldOfView;
+    [SerializeField] PlayerFOV fieldOfView;
     [SerializeField] movementManager movementmanager;
 
     private EnemyManager enemymanager;

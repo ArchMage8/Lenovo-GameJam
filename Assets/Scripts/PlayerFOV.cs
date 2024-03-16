@@ -5,7 +5,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEditor.SearchService;
 using UnityEngine;
 
-public class FieldOfView : MonoBehaviour
+public class PlayerFOV : MonoBehaviour
 {
     public float radius = 5f;
 
@@ -44,9 +44,8 @@ public class FieldOfView : MonoBehaviour
     {
         Collider2D[] rangeCheck = Physics2D.OverlapCircleAll(transform.position, radius, targetLayer);
 
-        Debug.Log(rangeCheck.Length);
 
-        if (rangeCheck.Length == 2)
+        if (rangeCheck.Length > 0)
         {
             foreach (Collider2D col in rangeCheck)
             {
@@ -58,42 +57,9 @@ public class FieldOfView : MonoBehaviour
 
                     if (!Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionLayer))
                     {
-                        
                         CanSeeTarget = true;
                         targetObject = col.gameObject;
                         break;
-                    }
-                    else
-                    {
-                        CanSeeTarget = false;
-                        targetObject = null;
-                    }
-                }
-                else
-                {
-                    CanSeeTarget = false;
-                    targetObject = null;
-                }
-            }
-        }
-
-        else if (rangeCheck.Length > 2)
-        {
-            foreach (Collider2D col in rangeCheck)
-            {
-                Vector2 directionToTarget = (col.transform.position - transform.position).normalized;
-
-                if (Vector2.Angle(transform.up, directionToTarget) < angle / 2f)
-                {
-                    float distanceToTarget = Vector2.Distance(transform.position, col.transform.position);
-
-                    if (!Physics2D.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionLayer))
-                    {
-                        if (col.gameObject.CompareTag("Player")){
-                            CanSeeTarget = true;
-                            targetObject = col.gameObject;
-                            break;
-                        }
                     }
                     else
                     {

@@ -20,7 +20,10 @@ public class DetectionSystem : MonoBehaviour
 
     public bool isChasingPlayer;
 
-    private Vector3 tempvalue;
+    private float tempvalue = float.PositiveInfinity;
+    private Vector2 tempPos;
+
+    [SerializeField] private float maxRange = 0.1f;
     public enum EnemyTags
     {
         Janitor,
@@ -44,6 +47,14 @@ public class DetectionSystem : MonoBehaviour
 
     public void Update()
     {
+        tempvalue = Vector2.Distance(transform.position, tempPos);
+      
+
+        if (tempvalue <= maxRange)
+        {
+            StartCoroutine(WaitingAround());
+        }
+
         if (!enemyManager.isPossessed && agent.enabled)
         {
             if (fieldOfView.targetObject != null)
@@ -69,6 +80,7 @@ public class DetectionSystem : MonoBehaviour
                         //Debug.Log("Movement 2");
                         enemyMovement.Transform_Movement(TargetObject.transform);
                         StartCoroutine(SusCheck());
+                        
 
                         suspicionBool = true;
                         hunting = true;
@@ -110,21 +122,24 @@ public class DetectionSystem : MonoBehaviour
         enemyMovement.Position_Movement(PlayerObject.transform.position);
         suspicionBool = true;
 
-        StartCoroutine(WaitingAround());
+       tempPos = PlayerObject.transform.position;
+
+        
     }
 
    
     private IEnumerator WaitingAround()
     {
-        
-        yield return new WaitForSeconds(25f);
+        Debug.Log("Movement 5");
+        yield return new WaitForSeconds(5f);
 
-        //Debug.Log("Movement 5");
+        
         isChasingPlayer = false;
 
         enemyManager.isChasing = false;
 
         hunting = false;
+        tempvalue = float.PositiveInfinity;
     }
     private IEnumerator QuickReturn()
     {
@@ -136,5 +151,6 @@ public class DetectionSystem : MonoBehaviour
 
 
         hunting = false;
+        tempvalue = float.PositiveInfinity;
     }
 }

@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3005d14382a9164b8282884f373bd4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 5
-  angle: 45
+  radius: 10
+  angle: 90
   targetLayer:
     serializedVersion: 2
     m_Bits: 136
@@ -216,6 +216,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fieldOfView: {fileID: 4330763701158792187}
+  isChasingPlayer: 0
+  maxRange: 0.1
   targetTag1: 4
   targetTag2: 4
 --- !u!114 &784476052855033418
@@ -254,6 +256,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2972457557117401009}
   - component: {fileID: 1875561523666111837}
+  - component: {fileID: 852982728152808815}
   m_Layer: 7
   m_Name: Visual
   m_TagString: Untagged
@@ -328,3 +331,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &852982728152808815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7693887960346495001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cdb88788beea224d8f5168be68ebcc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

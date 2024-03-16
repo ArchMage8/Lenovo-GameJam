@@ -34,8 +34,10 @@ public class EnemyPatrol : MonoBehaviour
         }
     }
 
-    public void LateUpdate()
+    public void Update()
     {
+       
+
         if (!enemyManager.isChasing && !enemyManager.isPossessed)
         {
             if (!isWaiting && isMoving)
