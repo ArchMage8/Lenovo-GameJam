@@ -36,11 +36,9 @@ public class EnemyPatrol : MonoBehaviour
 
     public void Update()
     {
-       
-
         if (!enemyManager.isChasing && !enemyManager.isPossessed)
         {
-            Debug.Log("Is patrolling");
+         
             if (!isWaiting && isMoving)
             {
                 if (Vector2.Distance(transform.position, internalArray[currentIndex]) <= 0.2f)
