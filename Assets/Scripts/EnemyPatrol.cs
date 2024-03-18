@@ -29,7 +29,6 @@ public class EnemyPatrol : MonoBehaviour
 
         for (int i = 0; i < checkpoints.Length; i++)
         {
-           
             internalArray[i] = checkpoints[i].transform.position;
         }
     }
@@ -38,7 +37,6 @@ public class EnemyPatrol : MonoBehaviour
     {
         if (!enemyManager.isChasing && !enemyManager.isPossessed)
         {
-         
             if (!isWaiting && isMoving)
             {
                 if (Vector2.Distance(transform.position, internalArray[currentIndex]) <= 0.2f)

@@ -10,7 +10,6 @@ public class EnemyManager : MonoBehaviour
     public Vector3 initialPosition;
     private NavMeshAgent agent;
     private DetectionSystem detectionSystem;
-
     public bool isChasing;
     public bool isPatrolling;
 
@@ -23,6 +22,8 @@ public class EnemyManager : MonoBehaviour
 
     private void Update()
     {   
+        Debug.Log(name + isChasing);
+
         if (isPossessed)
         {
             agent.enabled = false;  
