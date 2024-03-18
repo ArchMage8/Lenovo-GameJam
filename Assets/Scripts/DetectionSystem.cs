@@ -81,6 +81,7 @@ public class DetectionSystem : MonoBehaviour
 
                     if (TargetManager.isPossessed && !isChasingPlayer)
                     {
+                        isChasingPlayer = true;
                         Debug.Log("Movement 2");
                         enemyManager.isChasing = true;
                         enemyMovement.Transform_Movement(TargetObject.transform);
@@ -97,7 +98,7 @@ public class DetectionSystem : MonoBehaviour
             else
             {
                
-                if (!hunting)
+                if (!hunting && !isChasingPlayer)
                 {
                     if (hasBeenCalled)
                     {
@@ -111,7 +112,7 @@ public class DetectionSystem : MonoBehaviour
                         else
                         {
                            
-                            //Debug.Log("Direct Return");
+                            Debug.Log("Direct Return");
                             StartCoroutine(QuickReturn());
                             hasBeenCalled = false;
                         }
@@ -158,7 +159,7 @@ public class DetectionSystem : MonoBehaviour
    
     private IEnumerator WaitingAround()
     {
-        Debug.Log("Movement 5");
+        Debug.Log(name + "Movement 5");
         yield return new WaitForSeconds(5f);
 
         
@@ -174,7 +175,7 @@ public class DetectionSystem : MonoBehaviour
         
         yield return new WaitForSeconds(3f);
 
-        Debug.Log("Movement 6");
+        Debug.Log(name + "Movement 6");
         enemyManager.isChasing = false;
 
         isChasingPlayer = false;
