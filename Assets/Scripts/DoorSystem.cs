@@ -1,6 +1,9 @@
+using NavMeshPlus.Components;
+using NavMeshPlus.Extensions;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DoorSystem : MonoBehaviour
 {
@@ -16,30 +19,30 @@ public class DoorSystem : MonoBehaviour
     public TargetTags canInteract;
     public bool interacting;
 
+    [SerializeField] private GameObject TargetDoor;
     [SerializeField] private GameObject ClosedVisual;
     [SerializeField] private GameObject OpenedVisual;
 
-    private Collider2D component;
+    private Collider2D DoorCollider;
+    private NavMeshModifier Wall;
 
     private void Start()
     {
         ClosedVisual.SetActive(true);
         OpenedVisual.SetActive(false);
-
-        component = GetComponent<Collider2D>();
+        DoorCollider = TargetDoor.GetComponent<Collider2D>();
+        Wall = TargetDoor.GetComponent<NavMeshModifier>();
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D Collider)
     {
-        if (canInteract == TargetTags.All || collision.CompareTag(canInteract.ToString()))
-        {
+        
             if(interacting)
             {
                 ClosedVisual.SetActive(false);
                 OpenedVisual.SetActive(true);
-
-                component.enabled = false;
+                Wall.overrideArea = false;
+               
             }
-        }
+        
     }
 }

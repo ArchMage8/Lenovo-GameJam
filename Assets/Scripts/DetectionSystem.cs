@@ -6,28 +6,6 @@ using UnityEngine.AI;
 
 public class DetectionSystem : MonoBehaviour
 {
-    [SerializeField] FieldOfView fieldOfView;
-    private GameObject TargetObject;
-    private GameObject PlayerObject;
-
-    private EnemyManager enemyManager;
-    private EnemyMovement enemyMovement;
-
-    private bool suspicionBool;
-    private bool hasBeenCalled = false;
-    private bool hunting = false;
-
-    private float thispos;
-    private EnemyManager TargetManager;
-    private NavMeshAgent agent;
-
-    public bool isChasingPlayer;
-    private bool test;
-
-    private float tempvalue = float.PositiveInfinity;
-    private Vector2 tempPos;
-
-    [SerializeField] private float maxRange = 0.1f;
     public enum EnemyTags
     {
         Janitor,
@@ -40,149 +18,122 @@ public class DetectionSystem : MonoBehaviour
     public EnemyTags targetTag1;
     public EnemyTags targetTag2;
 
+    [SerializeField] private float chaseDuration = 5f;
+    [SerializeField] private float waitDuration = 5f;
+
+    private GameObject Target;
+    private Vector2 tempPlayerPos;
+    private float tempDistance = float.PositiveInfinity;
+
+    //Script references
+    private FieldOfView fieldOfView;
+    private EnemyMovement enemyMovement;
+    private EnemyManager enemyManager;
+    
+
+    //Bools
+    private bool isChasing = false;
+    private bool hunting = false;
+    private bool inRange = false;
+    
+ 
+
     private void Start()
     {
+        fieldOfView = GetComponentInChildren<FieldOfView>();
         enemyManager = GetComponent<EnemyManager>();
         enemyMovement = GetComponent<EnemyMovement>();
-
-        PlayerObject = GameObject.Find("Player");
-        agent = GetComponent<NavMeshAgent>();
     }
 
-    public void Update()
+    private void Update()
     {
-        tempvalue = Vector2.Distance(transform.position, tempPos);
+        tempDistance = Vector2.Distance(transform.position, tempPlayerPos);
 
+        Target = fieldOfView.targetObject;
+        enemyManager.isChasing = isChasing; //Note : This logic works cuz if we arent chasing AND there is no target that matches constraints, we dont enter logic
 
-        if (tempvalue <= maxRange)
+        if (Target != null && !isChasing) //Check if there is something infront of the NPC, and isnt currently chasing anything else
         {
-            StartCoroutine(WaitingAround()); //Return post suspicion logic
-            test = false;
-        }
-
-        if (!enemyManager.isPossessed && agent.enabled)
-        {
-            if (fieldOfView.targetObject != null)
+            if (Target.CompareTag("Player"))    //If target is Player, chase the player
             {
-                hasBeenCalled = true;
-                TargetObject = fieldOfView.targetObject;
+                Debug.Log("Movment 1");
+                enemyMovement.Transform_Movement(Target.transform);
+                isChasing = true;
 
-                if (TargetObject.CompareTag("Player"))
+            }
+
+            else if (Target.tag == targetTag1.ToString() || Target.tag == targetTag2.ToString()) //Else if the target is of interest
+            {
+                EnemyManager TargetManager = Target.GetComponent<EnemyManager>();
+                if (TargetManager != null && TargetManager.isPossessed)             //Check are they possessed?
                 {
-                    isChasingPlayer = true;
-                    //Debug.Log("Movement 1");
-                    enemyMovement.Transform_Movement(TargetObject.transform);
-                    enemyManager.isChasing = true;
-                    hunting = false;
-                }
+                    isChasing = true;
+                    hunting = true;
 
-                else if (TargetObject.tag == targetTag1.ToString() || TargetObject.tag == targetTag2.ToString())
-                {
-
-                    TargetManager = TargetObject.GetComponent<EnemyManager>();
-
-                    if (TargetManager.isPossessed && !isChasingPlayer)
+                    Debug.Log("Movement 2");
+                    enemyMovement.Transform_Movement(Target.transform);             //Chase the target
+                    tempPlayerPos = GameObject.Find("Player").transform.position;   //Where is the player currently
+                    StartCoroutine(ChasePossessed());                               //Chase the Possessed NPC [Refer Chase Possessed Comments]
+                    if (inRange)
                     {
-                        isChasingPlayer = true;
-                        Debug.Log("Movement 2");
-                        enemyManager.isChasing = true;
-                        enemyMovement.Transform_Movement(TargetObject.transform);
-                        StartCoroutine(SusCheck());
-
-
-                        suspicionBool = true;
-                        hunting = false;
-
-
+                        StartCoroutine(Waiting());
                     }
+
                 }
             }
-            else
-            {
 
-                if (!hunting)
-                {
-                    if (hasBeenCalled)
-                    {
-                        if (suspicionBool && !isChasingPlayer)
-                        {
-
-                            Debug.Log("Suspicion Return");
-                            hasBeenCalled = false;
-                            suspicionBool = false;
-                        }
-                        else
-                        {
-
-                            Debug.Log("Direct Return");
-                            StartCoroutine(QuickReturn());
-                            hasBeenCalled = false;
-                        }
-                    }
-                }
-            }
         }
-    }
 
-    private IEnumerator SusCheck()
-    {
-
-        yield return new WaitForSeconds(3f);
-
-        if (!test)
+        else
         {
-            if (fieldOfView.targetObject != null)
+            if (!hunting)
             {
-
-                Debug.Log("Conditions met, chasing player");
-                enemyMovement.Position_Movement(PlayerObject.transform.position);
-                suspicionBool = true;
-
-                tempPos = PlayerObject.transform.position;
-                test = true;
-                enemyManager.isChasing = true;
-                isChasingPlayer = true;
-            }
-            else
-            {
-                Debug.Log("Returning to Patrol");
-                StartCoroutine(QuickReturn());
-                test = true;
-
+                StartCoroutine(Timer());
+                isChasing = false;
             }
         }
+        if (tempDistance < 0.5f)
+        {
+            inRange = true;
+        }
+        else
+        {
+            inRange = false;
+        }
+    }
+        
 
+    private IEnumerator ChasePossessed()
+    {
+        
+        
+        yield return new WaitForSeconds(5f);                //Wait 5 seconds
 
-
-
-
+        if (Target != null)                                  //If after 5 seconds the possessed NPC is in line of sight
+        {
+            Debug.Log("Movment 3");
+            hunting = true;                                 //Handle the fact chasing the player means the NPC is looking at nothing
+            enemyMovement.Position_Movement(tempPlayerPos); //Go to the player position
+        }
+        else
+        {
+            Debug.Log("Movment 4");
+            yield return new WaitForSeconds(5f);            //Else activate "lost target logic"
+            hunting = false;
+        }
     }
 
-
-    private IEnumerator WaitingAround()
+    private IEnumerator Waiting()
     {
-        Debug.Log(name + "Movement 5");
+        Debug.Log("Movment 5");
+        yield return new WaitForSeconds(5f);                //At this point we have reached the player's pos
+        isChasing = false;                                  //Activating return to patrol logic
+        hunting = false;
+        tempDistance = float.PositiveInfinity;
+    }
+
+    private IEnumerator Timer()
+    {
         yield return new WaitForSeconds(5f);
-
-
-        isChasingPlayer = false;
-
-        enemyManager.isChasing = false;
-
-        hunting = false;
-        tempvalue = float.PositiveInfinity;
-    }
-    private IEnumerator QuickReturn()
-    {
-
-        yield return new WaitForSeconds(3f);
-
-        Debug.Log(name + "Movement 6");
-        enemyManager.isChasing = false;
-
-        isChasingPlayer = false;
-        hunting = false;
-        tempvalue = float.PositiveInfinity;
-        test = false;
     }
 }
