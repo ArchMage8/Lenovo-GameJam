@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class EnemyManager : MonoBehaviour
 {
+    [SerializeField] FieldOfView fieldOfView;
     public bool isPossessed;
     public Vector3 initialPosition;
     private NavMeshAgent agent;

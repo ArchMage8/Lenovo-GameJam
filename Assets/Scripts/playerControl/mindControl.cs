@@ -9,12 +9,9 @@ public class mindControl : MonoBehaviour
     [SerializeField] movementManager movementmanager;
 
     private EnemyManager enemymanager;
+    public float maxDistance = 50f;
 
     private PlayerControls input = null;
-
-    private Rigidbody2D rb;
-    
-    public float speed = 5f;
 
     public bool isMindControl;
 
@@ -40,8 +37,15 @@ public class mindControl : MonoBehaviour
         if (!isMindControl && fieldOfView.targetObject != null)
         { 
             if(!enemymanager.isChasing){
+
                 movementmanager.rb.velocity = new Vector2(0, 0);
+                movementmanager.target.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+                
+                
                 movementmanager.target = fieldOfView.targetObject;
+
+                movementmanager.target.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                // movementmanager.rb.bodyType = RigidbodyType2D.Dynamic;
                 isMindControl = true;
 
                 enemymanager = movementmanager.target.GetComponent<EnemyManager>();
@@ -50,13 +54,7 @@ public class mindControl : MonoBehaviour
         }
         else if (isMindControl)
         {
-            movementmanager.rb.velocity = new Vector2(0, 0);
-            isMindControl = false;
-            movementmanager.target = movementmanager.player;
-
-            enemymanager.isPossessed = false;
-            enemymanager = null;
-            
+            backToPlayer();
         }
     }
     
@@ -66,8 +64,35 @@ public class mindControl : MonoBehaviour
 
     void FixedUpdate()
     {
+        //asign enemy manager if player detect other NPC within FOV range
         if(fieldOfView.targetObject != null){  
           enemymanager = fieldOfView.targetObject.GetComponent<EnemyManager>();
+        }
+
+        rangeLimit();
+    }
+
+    void backToPlayer(){
+        movementmanager.rb.velocity = new Vector2(0, 0);
+        movementmanager.target.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+
+        isMindControl = false;
+            
+        movementmanager.target = movementmanager.player;
+
+        movementmanager.target.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+
+        enemymanager.isPossessed = false;
+        enemymanager = null;
+    }
+
+    void rangeLimit(){
+        float distance = Vector2.Distance(movementmanager.target.transform.position, movementmanager.player.transform.position);
+
+        // Debug.Log(distance);
+
+        if(maxDistance < distance){
+            backToPlayer();
         }
     }
 }

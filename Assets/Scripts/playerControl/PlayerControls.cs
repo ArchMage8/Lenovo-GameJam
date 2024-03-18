@@ -53,6 +53,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""flashlightControl"",
+                    ""type"": ""Button"",
+                    ""id"": ""fc851cfb-5181-464d-80ab-bdc92c12f4fb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -154,6 +163,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""mindControl"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e6abcb7c-b997-4acd-a981-0391c6b4fd46"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""flashlightControl"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6af9742e-02d9-44db-86d1-6c0c17fb520e"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""flashlightControl"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -193,6 +224,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Control_movement = m_Control.FindAction("movement", throwIfNotFound: true);
         m_Control_aim = m_Control.FindAction("aim", throwIfNotFound: true);
         m_Control_mindControl = m_Control.FindAction("mindControl", throwIfNotFound: true);
+        m_Control_flashlightControl = m_Control.FindAction("flashlightControl", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -257,6 +289,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Control_movement;
     private readonly InputAction m_Control_aim;
     private readonly InputAction m_Control_mindControl;
+    private readonly InputAction m_Control_flashlightControl;
     public struct ControlActions
     {
         private @PlayerControls m_Wrapper;
@@ -264,6 +297,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @movement => m_Wrapper.m_Control_movement;
         public InputAction @aim => m_Wrapper.m_Control_aim;
         public InputAction @mindControl => m_Wrapper.m_Control_mindControl;
+        public InputAction @flashlightControl => m_Wrapper.m_Control_flashlightControl;
         public InputActionMap Get() { return m_Wrapper.m_Control; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -282,6 +316,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @mindControl.started += instance.OnMindControl;
             @mindControl.performed += instance.OnMindControl;
             @mindControl.canceled += instance.OnMindControl;
+            @flashlightControl.started += instance.OnFlashlightControl;
+            @flashlightControl.performed += instance.OnFlashlightControl;
+            @flashlightControl.canceled += instance.OnFlashlightControl;
         }
 
         private void UnregisterCallbacks(IControlActions instance)
@@ -295,6 +332,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @mindControl.started -= instance.OnMindControl;
             @mindControl.performed -= instance.OnMindControl;
             @mindControl.canceled -= instance.OnMindControl;
+            @flashlightControl.started -= instance.OnFlashlightControl;
+            @flashlightControl.performed -= instance.OnFlashlightControl;
+            @flashlightControl.canceled -= instance.OnFlashlightControl;
         }
 
         public void RemoveCallbacks(IControlActions instance)
@@ -335,5 +375,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
         void OnMindControl(InputAction.CallbackContext context);
+        void OnFlashlightControl(InputAction.CallbackContext context);
     }
 }
