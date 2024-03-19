@@ -50,6 +50,7 @@ public class mindControl : MonoBehaviour
 
                 enemymanager = movementmanager.target.GetComponent<EnemyManager>();
                 enemymanager.isPossessed = true;
+                enemymanager.isPatrolling = false;
             }
         }
         else if (isMindControl)
@@ -98,8 +99,11 @@ public class mindControl : MonoBehaviour
 
     private IEnumerator Timer()
     {
-        yield return new WaitForSeconds(5f);
         enemymanager.isPossessed = false;
-        enemymanager = null;
+        yield return new WaitForSeconds(5f);
+        if(!isMindControl && !enemymanager.isChasing){            
+            enemymanager.isPatrolling = true;
+            enemymanager = null;
+        }
     }
 }

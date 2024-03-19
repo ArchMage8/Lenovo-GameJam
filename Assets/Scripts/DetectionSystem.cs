@@ -52,12 +52,13 @@ public class DetectionSystem : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(name+enemyManager.isPatrolling);
         if (!hunting)
         {
             tempPlayerPos = GameObject.Find("Player").transform.position;
         }
         tempDistance = Vector2.Distance(transform.position, tempPlayerPos);
-        Debug.Log(tempDistance);
+        // Debug.Log(tempDistance);
         Target = fieldOfView.targetObject;
         // enemyManager.isChasing = isChasing;
         // Debug.Log(name+enemyManager.isChasing); //Note : This logic works cuz if we arent chasing AND there is no target that matches constraints, we dont enter logic   
@@ -69,17 +70,16 @@ public class DetectionSystem : MonoBehaviour
 
         if (Target != null ) //&& !isChasing) //Check if there is something infront of the NPC, and isnt currently chasing anything else
         {
-            if (Target.CompareTag("Player"))    //If target is Player, chase the player
+            if (Target.CompareTag("Player") && !enemyManager.isPossessed)    //If target is Player, chase the player
             {
+                enemyManager.isPatrolling = false;
+                enemyManager.isChasing = true;
                 // Debug.Log("chasing player");
                 Debug.Log(fieldOfView.targetObject);
                 tempTargetPos = fieldOfView.targetObject.GetComponent<Transform>();
-                // Target = fieldOfView.targetObject;
                 enemyMovement.Transform_Movement(tempTargetPos);
-                enemyManager.isChasing = true;
-                // isChasing = true;
                 isChasingPlayer = true;
-
+                hunting = false;
             }
 
             else if ((Target.tag == targetTag1.ToString() || Target.tag == targetTag2.ToString()) && !isChasingPlayer) //Else if the target is of interest
@@ -88,6 +88,7 @@ public class DetectionSystem : MonoBehaviour
                 if (TargetManager != null && TargetManager.isPossessed)             //Check are they possessed?
                 {
                     enemyManager.isChasing = true;
+                    enemyManager.isPatrolling = false;
                     // hunting = true;
                     // Debug.Log("Movement 2");
                     // Target = fieldOfView.targetObject;
@@ -104,13 +105,9 @@ public class DetectionSystem : MonoBehaviour
 
         else
         {   
-            if(isChasingPlayer && Target == null && !hunting){
-                // Debug.Log("player lose line of sight");
-                StartCoroutine(Timer());
-            }
-            else if (!hunting && !isChasingPlayer)
-            {   
-                // Debug.Log("is chasing reset");
+            if(enemyManager.isChasing && Target == null && !hunting){
+                Debug.Log("player lose line of sight");
+                enemyManager.isChasing = false;
                 StartCoroutine(Timer());
             }
         }
@@ -140,7 +137,7 @@ public class DetectionSystem : MonoBehaviour
                     //Debug.Log("Chasing Player");
                     hunting = true;                                 //Handle the fact chasing the player means the NPC is looking at nothing
                     isChasingPlayer = true;
-                    enemyManager.isChasing = true;
+                    // enemyManager.isChasing = true;
                     enemyMovement.Position_Movement(tempPlayerPos); //Go to the player position
                     test = true;
                 }
@@ -160,9 +157,10 @@ public class DetectionSystem : MonoBehaviour
     private IEnumerator Waiting()
     {
         Debug.Log("Movement 5");
+        enemyManager.isChasing = false;                             //Activating return to patrol logic
         yield return new WaitForSeconds(5f);
+        enemyManager.isPatrolling = true;
         isChasingPlayer = false;                //At this point we have reached the player's pos
-        enemyManager.isChasing = false;                                  //Activating return to patrol logic
         hunting = false;
         tempDistance = float.PositiveInfinity;
         test = false;
@@ -170,10 +168,13 @@ public class DetectionSystem : MonoBehaviour
 
     private IEnumerator Timer()
     {
-        yield return new WaitForSeconds(4f);
         
-        isChasingPlayer = false;
-        enemyManager.isChasing = false;
-        test = false;
+        yield return new WaitForSeconds(5f);
+        Debug.Log(name +"patrolling");
+        if(!enemyManager.isChasing){   
+            enemyManager.isPatrolling = true;
+            isChasingPlayer = false;
+            test = false;
+        }
     }
 }

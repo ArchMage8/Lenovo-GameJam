@@ -11,7 +11,7 @@ public class EnemyManager : MonoBehaviour
     private NavMeshAgent agent;
     private DetectionSystem detectionSystem;
     public bool isChasing;
-    public bool isPatrolling;
+    public bool isPatrolling = true;
 
     private void Awake()
     {
@@ -19,10 +19,12 @@ public class EnemyManager : MonoBehaviour
         detectionSystem = GetComponent<DetectionSystem>();
         agent = GetComponent<NavMeshAgent>();   
     }
-
+    private void Start(){
+        isPatrolling = true;
+    }
     private void Update()
     {   
-        //Debug.Log(name + isChasing);
+        // Debug.Log(name + isChasing);
 
         if (isPossessed)
         {
