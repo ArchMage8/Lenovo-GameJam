@@ -992,6 +992,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Scientist
       objectReference: {fileID: 0}
+    - target: {fileID: 4330763701158792187, guid: 02946cd7521c5cf4a8a5d8865649dc43, type: 3}
+      propertyPath: angle
+      value: 41
+      objectReference: {fileID: 0}
     - target: {fileID: 7149825773735733524, guid: 02946cd7521c5cf4a8a5d8865649dc43, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -1745,8 +1749,12 @@ PrefabInstance:
       value: Guard
       objectReference: {fileID: 0}
     - target: {fileID: 4330763701158792187, guid: 02946cd7521c5cf4a8a5d8865649dc43, type: 3}
+      propertyPath: angle
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 4330763701158792187, guid: 02946cd7521c5cf4a8a5d8865649dc43, type: 3}
       propertyPath: radius
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7149825773735733524, guid: 02946cd7521c5cf4a8a5d8865649dc43, type: 3}
       propertyPath: waitTime
@@ -2459,7 +2467,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1782995289
 MonoBehaviour:
   m_ObjectHideFlags: 0

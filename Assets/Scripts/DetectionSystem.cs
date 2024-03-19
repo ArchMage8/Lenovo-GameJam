@@ -38,6 +38,7 @@ public class DetectionSystem : MonoBehaviour
     private bool hunting = false;
     private bool inRange = false;
     private bool possessedCheck = false;
+    private bool test = false;
     
 
  
@@ -51,16 +52,20 @@ public class DetectionSystem : MonoBehaviour
 
     private void Update()
     {
-        tempPlayerPos = GameObject.Find("Player").transform.position; 
+        if (!hunting)
+        {
+            tempPlayerPos = GameObject.Find("Player").transform.position;
+        }
         tempDistance = Vector2.Distance(transform.position, tempPlayerPos);
+        Debug.Log(tempDistance);
         Target = fieldOfView.targetObject;
         // enemyManager.isChasing = isChasing;
         // Debug.Log(name+enemyManager.isChasing); //Note : This logic works cuz if we arent chasing AND there is no target that matches constraints, we dont enter logic   
         if (inRange && hunting)
         {
-            Debug.Log("Chasing Finished");
             StartCoroutine(Waiting());
         }
+        Debug.Log(inRange);
 
         if (Target != null ) //&& !isChasing) //Check if there is something infront of the NPC, and isnt currently chasing anything else
         {
@@ -99,7 +104,7 @@ public class DetectionSystem : MonoBehaviour
 
         else
         {   
-            if(isChasingPlayer && Target == null){
+            if(isChasingPlayer && Target == null && !hunting){
                 // Debug.Log("player lose line of sight");
                 StartCoroutine(Timer());
             }
@@ -125,24 +130,30 @@ public class DetectionSystem : MonoBehaviour
         possessedCheck = true;
         yield return new WaitForSeconds(5f);                //Wait 5 seconds
 
-        if(Target != null){
-            if (Target.GetComponent<EnemyManager>().isPossessed)                                  //If after 5 seconds the possessed NPC is in line of sight
+        if(!test)
+        {
+            if (Target != null)
+            {
+                if (Target.GetComponent<EnemyManager>().isPossessed)  //If after 5 seconds the possessed NPC is in line of sight
+                {
+                    possessedCheck = false;
+                    //Debug.Log("Chasing Player");
+                    hunting = true;                                 //Handle the fact chasing the player means the NPC is looking at nothing
+                    isChasingPlayer = true;
+                    enemyManager.isChasing = true;
+                    enemyMovement.Position_Movement(tempPlayerPos); //Go to the player position
+                    test = true;
+                }
+            }
+            else
             {
                 possessedCheck = false;
-                // Debug.Log("Chasing Player");
-                hunting = true;                                 //Handle the fact chasing the player means the NPC is looking at nothing
-                isChasingPlayer = true;
-                enemyManager.isChasing = true;
-                enemyMovement.Position_Movement(tempPlayerPos); //Go to the player position
+                Debug.Log("Possesed escaped");
+                yield return new WaitForSeconds(5f);            //Else activate "lost target logic"
+                hunting = false;
+                enemyManager.isChasing = false;
+
             }
-        }
-        else
-        {
-            possessedCheck = false;
-            // Debug.Log("Possesed escaped");
-            yield return new WaitForSeconds(5f);            //Else activate "lost target logic"
-            hunting = false;
-            enemyManager.isChasing = false;
         }
     }
 
@@ -154,12 +165,15 @@ public class DetectionSystem : MonoBehaviour
         enemyManager.isChasing = false;                                  //Activating return to patrol logic
         hunting = false;
         tempDistance = float.PositiveInfinity;
+        test = false;
     }
 
     private IEnumerator Timer()
     {
         yield return new WaitForSeconds(4f);
+        
         isChasingPlayer = false;
         enemyManager.isChasing = false;
+        test = false;
     }
 }
