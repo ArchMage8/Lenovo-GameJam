@@ -35,7 +35,7 @@ public class EnemyPatrol : MonoBehaviour
 
     public void Update()
     {
-        if (!enemyManager.isChasing && !enemyManager.isPossessed)
+        if (!enemyManager.isChasing && !enemyManager.isPossessed && enemyManager.isPatrolling)
         {
             if (!isWaiting && isMoving)
             {
