@@ -22,7 +22,7 @@ public class EnemyManager : MonoBehaviour
 
     private void Update()
     {   
-        Debug.Log(name + isChasing);
+        //Debug.Log(name + isChasing);
 
         if (isPossessed)
         {

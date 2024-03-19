@@ -82,8 +82,8 @@ public class mindControl : MonoBehaviour
 
         movementmanager.target.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
 
-        enemymanager.isPossessed = false;
-        enemymanager = null;
+        StartCoroutine(Timer());
+       
     }
 
     void rangeLimit(){
@@ -94,5 +94,12 @@ public class mindControl : MonoBehaviour
         if(maxDistance < distance){
             backToPlayer();
         }
+    }
+
+    private IEnumerator Timer()
+    {
+        yield return new WaitForSeconds(5f);
+        enemymanager.isPossessed = false;
+        enemymanager = null;
     }
 }
