@@ -52,7 +52,7 @@ public class DetectionSystem : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(name+enemyManager.isPatrolling);
+        
         if (!hunting)
         {
             tempPlayerPos = GameObject.Find("Player").transform.position;
@@ -66,7 +66,7 @@ public class DetectionSystem : MonoBehaviour
         {
             StartCoroutine(Waiting());
         }
-        Debug.Log(inRange);
+        
 
         if (Target != null ) //&& !isChasing) //Check if there is something infront of the NPC, and isnt currently chasing anything else
         {

@@ -69,6 +69,7 @@ GameObject:
   - component: {fileID: 843339810785333437}
   - component: {fileID: 784476052855033418}
   - component: {fileID: 7149825773735733524}
+  - component: {fileID: 4406122013978465918}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -199,6 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d3220ac7c4bb264b850edf5bce151e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fieldOfView: {fileID: 0}
   isPossessed: 0
   initialPosition: {x: 0, y: 0, z: 0}
   isChasing: 0
@@ -215,11 +217,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36fdea3a010a84f46829077f876060bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fieldOfView: {fileID: 4330763701158792187}
-  isChasingPlayer: 0
-  maxRange: 0.1
   targetTag1: 4
   targetTag2: 4
+  chaseDuration: 5
+  waitDuration: 5
 --- !u!114 &784476052855033418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,6 +247,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   checkpoints: []
   waitTime: 3
+--- !u!114 &4406122013978465918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4245100316290504330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae5f3b4857ca2fa429fa020652579e1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7693887960346495001
 GameObject:
   m_ObjectHideFlags: 0

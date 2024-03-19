@@ -96,4 +96,4 @@ MonoBehaviour:
   fadeOutSpeed: 0.5
   visibilityDuration: 2
   fadeDelay: 1
-  entryDelay: 5
+  DelayAfterExit: 10
