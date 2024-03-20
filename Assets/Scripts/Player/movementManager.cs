@@ -13,6 +13,8 @@ public class movementManager : MonoBehaviour
     public GameObject player;
     public GameObject target;
 
+    private Vector2 mousePosition;
+    private Vector2 lastMousePosition;
     public Rigidbody2D rb;
     
     public float speed = 5f;
@@ -32,6 +34,9 @@ public class movementManager : MonoBehaviour
         input.Control.movement.performed += OnMovementPerformed;
         input.Control.movement.canceled += OnMovementCancelled;
 
+        input.Control.movementkbm.performed += OnMovementkbmPerformed;
+        input.Control.movementkbm.canceled += OnMovementkbmCancelled;
+
         input.Control.aim.performed += OnAimPerformed;
         input.Control.aim.canceled += OnAimCancelled;
     }
@@ -42,11 +47,15 @@ public class movementManager : MonoBehaviour
         input.Control.movement.performed -= OnMovementPerformed;
         input.Control.movement.canceled -= OnMovementCancelled;
 
+        input.Control.movementkbm.performed += OnMovementkbmPerformed;
+        input.Control.movementkbm.canceled += OnMovementkbmCancelled;
+
         input.Control.aim.performed -= OnAimPerformed;
         input.Control.aim.canceled -= OnAimCancelled;
     }
     private void OnAimPerformed(InputAction.CallbackContext value)
     {
+        usingController = true;
         aimVector = value.ReadValue<Vector2>();
     }
     private void OnAimCancelled(InputAction.CallbackContext value)
@@ -57,9 +66,21 @@ public class movementManager : MonoBehaviour
 
     private void OnMovementPerformed(InputAction.CallbackContext value)
     {
+        usingController = true;
         moveVector = value.ReadValue<Vector2>();
     }
     private void OnMovementCancelled(InputAction.CallbackContext value)
+    {
+        
+        moveVector = Vector2.zero;
+    }
+
+    private void OnMovementkbmPerformed(InputAction.CallbackContext value)
+    {
+        usingController = false;
+        moveVector = value.ReadValue<Vector2>();
+    }
+    private void OnMovementkbmCancelled(InputAction.CallbackContext value)
     {
         moveVector = Vector2.zero;
     }
@@ -70,6 +91,13 @@ public class movementManager : MonoBehaviour
 
     void FixedUpdate()
     {
+        mousePosition = Input.mousePosition;
+        if (mousePosition != lastMousePosition)
+        {
+            usingController = false;
+        }
+        lastMousePosition = mousePosition;
+
         if(!openMap.mapOpen){
             rb = target.GetComponent<Rigidbody2D>();
             rb.angularVelocity = 0;
@@ -79,9 +107,9 @@ public class movementManager : MonoBehaviour
             rb.velocity = new Vector2(0,0);
             rb.angularVelocity = 0;
         }
-
-        if (!usingController){
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    
+        if (!usingController && !openMap.mapOpen){
+            mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 direction = mousePosition - rb.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
             rb.rotation = angle;
