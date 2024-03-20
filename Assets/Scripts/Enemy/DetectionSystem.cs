@@ -20,7 +20,8 @@ public class DetectionSystem : MonoBehaviour
 
     [SerializeField] private float chaseDuration = 5f;
     [SerializeField] private float waitDuration = 5f;
-
+    public BackgroundMusic BackgroundMusic;
+    private GameObject AudioManager;
     private GameObject Target;
     private Vector2 tempPlayerPos;
     private Transform tempTargetPos;
@@ -48,6 +49,8 @@ public class DetectionSystem : MonoBehaviour
         fieldOfView = GetComponentInChildren<FieldOfView>();
         enemyManager = GetComponent<EnemyManager>();
         enemyMovement = GetComponent<EnemyMovement>();
+        AudioManager = GameObject.Find("AudioManager");
+        BackgroundMusic = AudioManager.GetComponent<BackgroundMusic>();
     }
 
     private void Update()
@@ -55,15 +58,13 @@ public class DetectionSystem : MonoBehaviour
         
         if (!hunting)
         {
-            tempPlayerPos = GameObject.Find("Player").transform.position;
+            tempPlayerPos = GameObject.FindWithTag("Player").transform.position;
         }
         tempDistance = Vector2.Distance(transform.position, tempPlayerPos);
-        // Debug.Log(tempDistance);
         Target = fieldOfView.targetObject;
-        // enemyManager.isChasing = isChasing;
-        // Debug.Log(name+enemyManager.isChasing); //Note : This logic works cuz if we arent chasing AND there is no target that matches constraints, we dont enter logic   
-        if (inRange && hunting)
+         if (inRange && hunting)
         {
+            BackgroundMusic.ChasingMusic = false;
             StartCoroutine(Waiting());
         }
         
@@ -72,6 +73,8 @@ public class DetectionSystem : MonoBehaviour
         {
             if (Target.CompareTag("Player") && !enemyManager.isPossessed)    //If target is Player, chase the player
             {
+                BackgroundMusic.ChasingMusic = true;
+
                 enemyManager.isPatrolling = false;
                 enemyManager.isChasing = true;
                 // Debug.Log("chasing player");
@@ -87,6 +90,8 @@ public class DetectionSystem : MonoBehaviour
                 EnemyManager TargetManager = Target.GetComponent<EnemyManager>();
                 if (TargetManager != null && TargetManager.isPossessed)             //Check are they possessed?
                 {
+                    BackgroundMusic.ChasingMusic = true;
+
                     enemyManager.isChasing = true;
                     enemyManager.isPatrolling = false;
                     // hunting = true;
@@ -106,6 +111,7 @@ public class DetectionSystem : MonoBehaviour
         else
         {   
             if(enemyManager.isChasing && Target == null && !hunting){
+                BackgroundMusic.ChasingMusic = false;
                 Debug.Log("player lose line of sight");
                 enemyManager.isChasing = false;
                 StartCoroutine(Timer());
@@ -144,6 +150,7 @@ public class DetectionSystem : MonoBehaviour
             }
             else
             {
+                BackgroundMusic.ChasingMusic = false;
                 possessedCheck = false;
                 Debug.Log("Possesed escaped");
                 yield return new WaitForSeconds(5f);            //Else activate "lost target logic"
