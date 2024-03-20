@@ -12,9 +12,9 @@ public class CharacterAnimationController : MonoBehaviour
 
     private void Start()
     {
-        direction_transform = GetComponent<Transform>();
-        agent = GetComponent<NavMeshAgent>();
-        playerBody = GetComponent<Rigidbody2D>();
+        direction_transform = GetComponentInParent<Transform>();
+        agent = GetComponentInParent<NavMeshAgent>();
+        playerBody = GetComponentInParent<Rigidbody2D>();
 
         if(direction_transform == null && agent == null)
         {

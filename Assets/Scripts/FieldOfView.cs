@@ -15,7 +15,9 @@ public class FieldOfView : MonoBehaviour
     [SerializeField] private LayerMask targetLayer;
     [SerializeField] private LayerMask obstructionLayer;
 
+    [HideInInspector]
     public GameObject targetObject;
+    
     private GameObject ParentObject;
 
 
