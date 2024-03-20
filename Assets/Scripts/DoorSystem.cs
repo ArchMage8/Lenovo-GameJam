@@ -3,6 +3,7 @@ using NavMeshPlus.Extensions;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class DoorSystem : MonoBehaviour
@@ -24,13 +25,16 @@ public class DoorSystem : MonoBehaviour
     [SerializeField] private GameObject OpenedVisual;
 
     private Collider2D TriggerCollider;
-    private NavMeshModifier Wall;
+    private NavMeshObstacle doorMesh;
 
     private void Start()
     {
         ClosedVisual.SetActive(true);
         OpenedVisual.SetActive(false);
         TriggerCollider = GetComponent<BoxCollider2D>();
+        doorMesh = GetComponentInParent<NavMeshObstacle>();
+
+        
     }
 
     private void Update()
@@ -41,6 +45,7 @@ public class DoorSystem : MonoBehaviour
             OpenedVisual.SetActive(true);
 
             TriggerCollider.enabled = false;
+            doorMesh.enabled = false;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -60,5 +65,5 @@ public class DoorSystem : MonoBehaviour
     }
 
 
-
+   
 }
