@@ -48,3 +48,6 @@ TagManager:
   - name: floor
     uniqueID: 1316710193
     locked: 0
+  - name: Interact Text
+    uniqueID: 551145663
+    locked: 0
