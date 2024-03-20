@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using UnityEngine.Rendering.Universal;
+
 
 public class DoorSystem : MonoBehaviour
 {
@@ -27,20 +29,26 @@ public class DoorSystem : MonoBehaviour
     private Collider2D TriggerCollider;
     private NavMeshObstacle doorMesh;
 
-    private void Start()
+    private PlayerControls input = null;
+    private void Awake() 
     {
-        ClosedVisual.SetActive(true);
-        OpenedVisual.SetActive(false);
-        TriggerCollider = GetComponent<BoxCollider2D>();
-        doorMesh = GetComponentInParent<NavMeshObstacle>();
-        InteractText.SetActive(false) ;
-
-        
+        input = new PlayerControls();
     }
 
-    private void Update()
+    private void OnEnable() 
     {
-        if(interacting && Input.GetKeyDown(KeyCode.P))
+        input.Enable();
+        input.Control.interact.performed += OnflashlightPerformed;
+    }
+
+    private void OnDisable()
+    {
+        input.Disable();
+        input.Control.interact.performed -= OnflashlightPerformed;
+    }
+     private void OnflashlightPerformed(InputAction.CallbackContext context)
+    {
+        if(interacting)
         {
             ClosedVisual.SetActive(false);
             OpenedVisual.SetActive(true);
@@ -48,6 +56,14 @@ public class DoorSystem : MonoBehaviour
             TriggerCollider.enabled = false;
             doorMesh.enabled = false;
         }
+    }
+    private void Start()
+    {
+        ClosedVisual.SetActive(true);
+        OpenedVisual.SetActive(false);
+        TriggerCollider = GetComponent<BoxCollider2D>();
+        doorMesh = GetComponentInParent<NavMeshObstacle>();
+        InteractText.SetActive(false) ;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

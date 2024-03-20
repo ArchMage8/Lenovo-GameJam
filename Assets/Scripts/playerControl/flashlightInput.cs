@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 
 public class flashlightInput : MonoBehaviour
 {
-    [SerializeField] DetectionSystem DetectionSystem;
     [SerializeField] PlayerFOV fieldOfView;
 
     private EnemyManager enemymanager;
+
+    public GameObject player;
 
     public GameObject flashlightobject;
 
@@ -36,18 +38,23 @@ public class flashlightInput : MonoBehaviour
     {
         flashlight = !flashlight;
     }
-
+    void Start()
+    {
+        player = GameObject.FindWithTag("Player");
+        flashlightobject = GameObject.Find("PlayerFlashlight");
+    }
     void Update()
     {
         if(flashlight){
-            flashlightobject.SetActive(true);
+            flashlightobject.GetComponent<Light2D>().intensity = 1.59f;
         }
         else{
-            flashlightobject.SetActive(false);
+            flashlightobject.GetComponent<Light2D>().intensity = 0.5f;
         }
         if(flashlight && fieldOfView.targetObject != null){
-            fieldOfView.targetObject.GetComponent< EnemyMovement>().Transform_Movement(transform);
-            fieldOfView.targetObject.GetComponent<EnemyManager>().isChasing = true;
+            fieldOfView.targetObject.GetComponent< EnemyMovement>().Transform_Movement(player.GetComponent<Transform>());
+            fieldOfView.targetObject.GetComponent<EnemyManager>().isPatrolling = false;
+
             // fieldOfView.targetObject.GetComponent<DetectionSystem>().chasingPlayer();
         }
     }

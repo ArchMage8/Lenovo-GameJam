@@ -61,6 +61,7 @@ public class mindControl : MonoBehaviour
     
     void Start(){
         movementmanager.target = movementmanager.player;
+        fieldOfView = this.GetComponent<PlayerFOV>();
     }
 
     void FixedUpdate()

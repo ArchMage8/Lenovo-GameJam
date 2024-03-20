@@ -62,6 +62,33 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""map"",
+                    ""type"": ""Button"",
+                    ""id"": ""a0cc504d-743f-4564-a2bb-810549cd07b0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""70c54602-d95e-4ca6-8777-b6038f292f5d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""4a512c40-1390-41e3-b634-1888f37047d4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -145,7 +172,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""dc898f5c-3ab2-499e-922b-26220b9b1027"",
-                    ""path"": ""<Keyboard>/t"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -156,7 +183,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""afcfd162-da08-48be-87d2-0c4311b6bddd"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -167,7 +194,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e6abcb7c-b997-4acd-a981-0391c6b4fd46"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -178,11 +205,77 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""6af9742e-02d9-44db-86d1-6c0c17fb520e"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""flashlightControl"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2a8c6411-cf6c-45b0-90b5-e85fe9caa178"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""map"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5f2a9769-f2f3-4f4a-9199-ff271e5eae5d"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""map"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""111e15bf-7ca6-46a7-be87-92704e31fe3b"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""77c6cb38-879e-435c-874f-afa0b7928d23"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""76dd08c6-aeb5-4963-ae8d-d1fb620ae5a5"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bd3732dd-16cb-465d-8405-d645ba876644"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -225,6 +318,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Control_aim = m_Control.FindAction("aim", throwIfNotFound: true);
         m_Control_mindControl = m_Control.FindAction("mindControl", throwIfNotFound: true);
         m_Control_flashlightControl = m_Control.FindAction("flashlightControl", throwIfNotFound: true);
+        m_Control_map = m_Control.FindAction("map", throwIfNotFound: true);
+        m_Control_interact = m_Control.FindAction("interact", throwIfNotFound: true);
+        m_Control_pause = m_Control.FindAction("pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -290,6 +386,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Control_aim;
     private readonly InputAction m_Control_mindControl;
     private readonly InputAction m_Control_flashlightControl;
+    private readonly InputAction m_Control_map;
+    private readonly InputAction m_Control_interact;
+    private readonly InputAction m_Control_pause;
     public struct ControlActions
     {
         private @PlayerControls m_Wrapper;
@@ -298,6 +397,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @aim => m_Wrapper.m_Control_aim;
         public InputAction @mindControl => m_Wrapper.m_Control_mindControl;
         public InputAction @flashlightControl => m_Wrapper.m_Control_flashlightControl;
+        public InputAction @map => m_Wrapper.m_Control_map;
+        public InputAction @interact => m_Wrapper.m_Control_interact;
+        public InputAction @pause => m_Wrapper.m_Control_pause;
         public InputActionMap Get() { return m_Wrapper.m_Control; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -319,6 +421,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @flashlightControl.started += instance.OnFlashlightControl;
             @flashlightControl.performed += instance.OnFlashlightControl;
             @flashlightControl.canceled += instance.OnFlashlightControl;
+            @map.started += instance.OnMap;
+            @map.performed += instance.OnMap;
+            @map.canceled += instance.OnMap;
+            @interact.started += instance.OnInteract;
+            @interact.performed += instance.OnInteract;
+            @interact.canceled += instance.OnInteract;
+            @pause.started += instance.OnPause;
+            @pause.performed += instance.OnPause;
+            @pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(IControlActions instance)
@@ -335,6 +446,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @flashlightControl.started -= instance.OnFlashlightControl;
             @flashlightControl.performed -= instance.OnFlashlightControl;
             @flashlightControl.canceled -= instance.OnFlashlightControl;
+            @map.started -= instance.OnMap;
+            @map.performed -= instance.OnMap;
+            @map.canceled -= instance.OnMap;
+            @interact.started -= instance.OnInteract;
+            @interact.performed -= instance.OnInteract;
+            @interact.canceled -= instance.OnInteract;
+            @pause.started -= instance.OnPause;
+            @pause.performed -= instance.OnPause;
+            @pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(IControlActions instance)
@@ -376,5 +496,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnAim(InputAction.CallbackContext context);
         void OnMindControl(InputAction.CallbackContext context);
         void OnFlashlightControl(InputAction.CallbackContext context);
+        void OnMap(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }

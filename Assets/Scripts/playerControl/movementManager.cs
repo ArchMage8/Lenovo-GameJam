@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class movementManager : MonoBehaviour
 {
+    [SerializeField] openMap openMap;
     private PlayerControls input = null;
     private Vector2 moveVector = Vector2.zero;
     private Vector2 aimVector = Vector2.zero;
@@ -69,9 +70,15 @@ public class movementManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb = target.GetComponent<Rigidbody2D>();
-        rb.angularVelocity = 0;
-        rb.velocity = moveVector * speed;
+        if(!openMap.mapOpen){
+            rb = target.GetComponent<Rigidbody2D>();
+            rb.angularVelocity = 0;
+            rb.velocity = moveVector * speed;
+        }
+        else{
+            rb.velocity = new Vector2(0,0);
+            rb.angularVelocity = 0;
+        }
 
         if (!usingController){
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -79,7 +86,7 @@ public class movementManager : MonoBehaviour
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
             rb.rotation = angle;
         }
-        else {
+        else if(!openMap.mapOpen){
             if(aimVector != Vector2.zero){
             float angle = Mathf.Atan2(aimVector.y, aimVector.x) * Mathf.Rad2Deg - 90;
             rb.rotation = angle;
