@@ -17,32 +17,48 @@ public class DoorSystem : MonoBehaviour
     }
 
     public TargetTags canInteract;
-    public bool interacting;
-
-    [SerializeField] private GameObject TargetDoor;
+    private bool interacting;
+  
+    
     [SerializeField] private GameObject ClosedVisual;
     [SerializeField] private GameObject OpenedVisual;
 
-    private Collider2D DoorCollider;
+    private Collider2D TriggerCollider;
     private NavMeshModifier Wall;
 
     private void Start()
     {
         ClosedVisual.SetActive(true);
         OpenedVisual.SetActive(false);
-        DoorCollider = TargetDoor.GetComponent<Collider2D>();
-        Wall = TargetDoor.GetComponent<NavMeshModifier>();
+        TriggerCollider = GetComponent<BoxCollider2D>();
     }
-    private void OnCollisionEnter2D(Collision2D Collider)
+
+    private void Update()
     {
-        
-            if(interacting)
-            {
-                ClosedVisual.SetActive(false);
-                OpenedVisual.SetActive(true);
-                Wall.overrideArea = false;
-               
-            }
-        
+        if(interacting && Input.GetKeyDown(KeyCode.P))
+        {
+            ClosedVisual.SetActive(false);
+            OpenedVisual.SetActive(true);
+
+            TriggerCollider.enabled = false;
+        }
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == canInteract.ToString())
+        {
+            interacting = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == canInteract.ToString())
+        {
+            interacting = false;
+        }
+    }
+
+
+
 }
