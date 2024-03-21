@@ -385,10 +385,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b8a6c7d5f48b64497d1846d6a7a76e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canInteract: 0
+  canInteract: 2
   ClosedVisual: {fileID: 8334668822494605271}
   OpenedVisual: {fileID: 6554859139624272832}
   InteractText: {fileID: 0}
+  remote: 0
+  RemoteOpen: {fileID: 0}
+  RemoteVolume: 0
+  DirectOpen: {fileID: 0}
+  DirectVolume: 0
 --- !u!1 &8334668822494605271
 GameObject:
   m_ObjectHideFlags: 0
