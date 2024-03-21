@@ -36,7 +36,9 @@ public class DoorSystem : MonoBehaviour
     [Header("Audio")]
     [SerializeField] private bool remote;// unutk ganti suara
     public AudioClip RemoteOpen;
+    public float RemoteVolume;
     public AudioClip DirectOpen;
+    public float DirectVolume;
 
     private void Awake() 
     {
@@ -66,12 +68,12 @@ public class DoorSystem : MonoBehaviour
 
             if (remote)
             {
-                SoundManager.instance.PlaySound(RemoteOpen);
+                SoundManager.instance.PlaySound(RemoteOpen, RemoteVolume);
             }
 
             else if (!remote)
             {
-                SoundManager.instance.PlaySound(DirectOpen);
+                SoundManager.instance.PlaySound(DirectOpen, DirectVolume);
             }
         }
     }
