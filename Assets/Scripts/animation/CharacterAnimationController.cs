@@ -5,16 +5,17 @@ using UnityEngine.AI;
 
 public class CharacterAnimationController : MonoBehaviour
 {
-    private Transform direction_transform;
+    [SerializeField]private Transform direction_transform;
     private Rigidbody2D playerBody;
     private NavMeshAgent agent;
-    private Animator animator;
+    [SerializeField] private Animator animator;
 
     private void Start()
     {
-        direction_transform = GetComponentInParent<Transform>();
+       
         agent = GetComponentInParent<NavMeshAgent>();
         playerBody = GetComponentInParent<Rigidbody2D>();
+       
 
         if(direction_transform == null && agent == null)
         {
@@ -24,30 +25,41 @@ public class CharacterAnimationController : MonoBehaviour
 
     void Update()
     {
-     
-        if(agent != null) //Untuk AI Enemy
+        if (animator != null)
         {
-            if(agent.velocity.magnitude >= 0.1)
+            if (agent != null) //Untuk AI Enemy
             {
-                MovingdirectionCheck();
+              
+                if (agent.velocity.magnitude >= 0.1)
+                {
+                    //Debug.Log("Movement1");
+                    animator.SetBool("IsMoving", true);
+                    MovingdirectionCheck();
+                }
+
+                else if(agent.velocity.magnitude < 0.1)
+                {
+                    //Debug.Log("Movement2");
+                    animator.SetBool("IsMoving", false);
+                    IdleDirectionCheck();
+                }
             }
 
-            else
+            else if (agent == null) //Untuk Player
             {
-                IdledirectionCheck();
-            }
-        }  
+                if (playerBody.velocity.magnitude >= 0.1)
+                {
+                    //Debug.Log("Movement3");
+                    animator.SetBool("IsMoving", true);
+                    MovingdirectionCheck();
+                }
 
-      else if(direction_transform != null && agent == null) //Untuk Player
-        {
-            if(playerBody.velocity.magnitude >= 0.1)
-            {
-                MovingdirectionCheck();
-            }
-
-            else
-            {
-                IdledirectionCheck();
+                else
+                {
+                    //Debug.Log("Movement4");
+                    animator.SetBool("IsMoving", false);
+                    IdleDirectionCheck();
+                }
             }
         }
     }
@@ -56,64 +68,77 @@ public class CharacterAnimationController : MonoBehaviour
     {
         if (CheckZRotationRange(transform, 0f, 45f) || CheckZRotationRange(transform, -45f, 0f))
         {
-            Debug.Log("Up");
-            animator.SetTrigger("Moving_Up");
+
+            //Debug.Log("MovingUp");
+            animator.SetFloat("Vertical", 1);
+            animator.SetFloat("Horizontal", 0);
         }
 
         if (CheckZRotationRange(transform, 46f, 135f))
         {
-            Debug.Log("Left");
-            animator.SetTrigger("Moving_Left");
+            //Debug.Log("MovingLeft");
+            animator.SetFloat("Horizontal", -1);
+            animator.SetFloat("Vertical", 0);
         }
 
         if (CheckZRotationRange(transform, -135f, -46f))
         {
-            Debug.Log("Right");
-            animator.SetTrigger("Moving_Right");
+            //Debug.Log("MovingRight");
+            animator.SetFloat("Horizontal", 1);
+            animator.SetFloat("Vertical", 0);
         }
 
         if (CheckZRotationRange(transform, -180f, -136f) || CheckZRotationRange(transform, 136f, 180f))
         {
-            Debug.Log("Down");
-            animator.SetTrigger("Moving_Down");
+            //Debug.Log("MovingDown");
+            animator.SetFloat("Vertical", -1);
+            animator.SetFloat("Horizontal", 0);
         }
     }
     
-    private void IdledirectionCheck()
+    private void IdleDirectionCheck()
     {
         if (CheckZRotationRange(transform, 0f, 45f) || CheckZRotationRange(transform, -45f, 0f))
         {
-            Debug.Log("Up");
-            animator.SetTrigger("Idle_Up");
+            //Debug.Log("IdleUp");
+            animator.SetFloat("IdleVertical", 1);
+            animator.SetFloat("IdleHorizontal", 0);
         }
 
         if (CheckZRotationRange(transform, 46f, 135f))
         {
-            Debug.Log("Left");
-            animator.SetTrigger("Idle_Left");
+            //Debug.Log("IdleLeft");
+            animator.SetFloat("IdleHorizontal", -1);
+            animator.SetFloat("IdleVertical", 0);
+
         }
 
         if (CheckZRotationRange(transform, -135f, -46f))
         {
-            Debug.Log("Right");
-            animator.SetTrigger("Idle_Right");
+            //Debug.Log("IdleRight");
+            animator.SetFloat("IdleHorizontal", 1);
+            animator.SetFloat("IdleVertical", 0);
+
         }
 
         if (CheckZRotationRange(transform, -180f, -136f) || CheckZRotationRange(transform, 136f, 180f))
         {
-            Debug.Log("Down");
-            animator.SetTrigger("Idle_Down");
+            //Debug.Log("IdleDown");
+            animator.SetFloat("IdleVertical", -1);
+            animator.SetFloat("IdleHorizontal", 0);
         }
     }
 
     public bool CheckZRotationRange(Transform transform, float rangeStart, float rangeEnd)
     {
-        float zRotation = transform.eulerAngles.z;
+        float zRotation = direction_transform.rotation.eulerAngles.z;
 
         if (zRotation > 180f)
         {
             zRotation -= 360f;
         }
+
+        Debug.Log(zRotation);
 
         return zRotation >= rangeStart && zRotation <= rangeEnd;
     }
