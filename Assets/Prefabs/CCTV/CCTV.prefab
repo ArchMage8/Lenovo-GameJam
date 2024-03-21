@@ -53,7 +53,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1102774768193597818}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -221,10 +221,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fieldOfView: {fileID: 3089631031192759407}
-  maxLeft: 90
-  maxRight: 90
+  maxLeft: 1
+  maxRight: 1
   speed: 10
-  waitTime: 3
+  waitTime: 2
   cctvOn: 1
   flashlight: {fileID: 2678295897112703073}
 --- !u!114 &3089631031192759407
