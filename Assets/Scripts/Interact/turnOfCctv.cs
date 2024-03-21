@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class GameObjectArrayExample : MonoBehaviour
+public class turnOfCctv : MonoBehaviour
 {
     public enum TargetTags
     {
@@ -20,6 +20,8 @@ public class GameObjectArrayExample : MonoBehaviour
     private PlayerControls input = null;
 
     private bool interacting;
+    public AudioClip CCTVoff;
+    public float CCTVvolume;
 
     private void Awake() 
     {
@@ -45,10 +47,12 @@ public class GameObjectArrayExample : MonoBehaviour
                 if (obj != null)
                 {
                     obj.GetComponent<cctvMovement>().cctvOn = false;
+                    SoundManager.instance.PlaySound(CCTVoff, CCTVvolume);
                 }
             }
         }
     }
+
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
