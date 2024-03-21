@@ -12,8 +12,8 @@ public class MenuInput : MonoBehaviour
     private GameObject MovementGameObject;
     private GameObject Player;
     private movementManager MovementManager;
-    private PlayerControls input = null;
     [HideInInspector] public bool menuOpen = false;
+    private PlayerControls input = null;
     private void Awake() 
     {
         input = new PlayerControls();

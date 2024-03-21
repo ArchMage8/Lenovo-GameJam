@@ -12,6 +12,8 @@ public class cctvMovement : MonoBehaviour
     public float waitTime;
     private bool turningRight = false;
     public bool cctvOn;
+    public GameObject flashlight;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +36,7 @@ public class cctvMovement : MonoBehaviour
         }
         else{
             rb.angularVelocity = 0;
+            flashlight.SetActive(false);
         }
     }
 

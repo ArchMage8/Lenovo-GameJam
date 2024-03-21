@@ -25,26 +25,32 @@ public class BackgroundMusic : MonoBehaviour
     {
         if (ChasingMusic)
         {
+            if(!SneakMusic.isPlaying)
+            {
+                SneakMusic.Play();
+            }
+            isPlaying = true;   
             if (SneakMusic.volume <= 1)
             {
-                isPlaying = true;
-                SneakMusic.Play();
+                isPlaying = true;   
                 SneakMusic.volume += InAudiofade;
                 ChaseMusic.volume -= OutAudiofade;
-                ChaseMusic.Stop();
             }
+            ChaseMusic.Stop();
         }
         else
         {
             if (SneakMusic.volume >= 0)
             {
-                ChaseMusic.Play();
+                if(!ChaseMusic.isPlaying)
+                {
+                    ChaseMusic.Play();
+                }
                 SneakMusic.volume -= InAudiofade;
                 ChaseMusic.volume += OutAudiofade;
                 SneakMusic.Stop();
                 isPlaying = false;
             }
-
         }
 
         if (ChasingMusic && !isPlaying) 
