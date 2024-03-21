@@ -22,16 +22,20 @@ public class BackgroundMusic : MonoBehaviour
         {
             if(SneakMusic.volume <= 1)
             {
+                SneakMusic.Play();
                 SneakMusic.volume +=audiofade;
                 ChaseMusic.volume -=audiofade;
+                ChaseMusic.Stop();
             }
         }
         else
         {
             if(SneakMusic.volume >= 0)
             {
+                ChaseMusic.Play();
                 SneakMusic.volume -= audiofade;
                 ChaseMusic.volume += audiofade;
+                SneakMusic.Stop();
             }
         }
     }
