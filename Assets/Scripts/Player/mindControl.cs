@@ -14,6 +14,8 @@ public class mindControl : MonoBehaviour
     private PlayerControls input = null;
 
     public bool isMindControl;
+    public AudioClip ToggleControl;
+    public float ToggleVolume;
 
     private void Awake() 
     {
@@ -37,7 +39,7 @@ public class mindControl : MonoBehaviour
         if (!isMindControl && fieldOfView.targetObject != null)
         { 
             if(!enemymanager.isChasing){
-
+                SoundManager.instance.PlaySound(ToggleControl, ToggleVolume);
                 movementmanager.rb.velocity = new Vector2(0, 0);
                 movementmanager.target.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
                 
@@ -55,6 +57,7 @@ public class mindControl : MonoBehaviour
         }
         else if (isMindControl)
         {
+            SoundManager.instance.PlaySound(ToggleControl, ToggleVolume);
             backToPlayer();
         }
     }
