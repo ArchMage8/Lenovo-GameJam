@@ -20,7 +20,7 @@ public class DoorSystem : MonoBehaviour
     }
 
     public TargetTags canInteract;
-    private bool interacting;
+    
   
     
     [SerializeField] private GameObject ClosedVisual;
@@ -29,8 +29,15 @@ public class DoorSystem : MonoBehaviour
 
     private Collider2D TriggerCollider;
     private NavMeshObstacle doorMesh;
+    private bool interacting;
 
     private PlayerControls input = null;
+
+    [Header("Audio")]
+    [SerializeField] private bool remote;// unutk ganti suara
+    public AudioClip RemoteOpen;
+    public AudioClip DirectOpen;
+
     private void Awake() 
     {
         input = new PlayerControls();
@@ -39,23 +46,33 @@ public class DoorSystem : MonoBehaviour
     private void OnEnable() 
     {
         input.Enable();
-        input.Control.interact.performed += OnflashlightPerformed;
+        input.Control.interact.performed += OnInteractPerform;
     }
 
     private void OnDisable()
     {
         input.Disable();
-        input.Control.interact.performed -= OnflashlightPerformed;
+        input.Control.interact.performed -= OnInteractPerform;
     }
-     private void OnflashlightPerformed(InputAction.CallbackContext context)
+     private void OnInteractPerform(InputAction.CallbackContext context)
     {
-        if(interacting)
+        if (interacting)
         {
             ClosedVisual.SetActive(false);
             OpenedVisual.SetActive(true);
 
             TriggerCollider.enabled = false;
             doorMesh.enabled = false;
+
+            if (remote)
+            {
+                SoundManager.instance.PlaySound(RemoteOpen);
+            }
+
+            else if (!remote)
+            {
+                SoundManager.instance.PlaySound(DirectOpen);
+            }
         }
     }
     private void Start()

@@ -49,7 +49,7 @@ public class DetectionSystem : MonoBehaviour
         fieldOfView = GetComponentInChildren<FieldOfView>();
         enemyManager = GetComponent<EnemyManager>();
         enemyMovement = GetComponent<EnemyMovement>();
-        AudioManager = GameObject.Find("AudioManager");
+        AudioManager = GameObject.Find("MusicManager");
         BackgroundMusic = AudioManager.GetComponent<BackgroundMusic>();
     }
 

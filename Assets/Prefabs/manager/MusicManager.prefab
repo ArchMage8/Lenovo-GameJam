@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ChasingMusic: 0
-  audiofade: 5
+  audiofade: 2
   ChaseMusic: {fileID: 6397504585293508497}
   SneakMusic: {fileID: 1129172920909022064}
 --- !u!82 &6397504585293508497
