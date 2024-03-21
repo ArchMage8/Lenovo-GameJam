@@ -29,15 +29,15 @@ public class CharacterAnimationController : MonoBehaviour
         {
             if (agent != null) //Untuk AI Enemy
             {
-              
-                if (agent.velocity.magnitude >= 0.1)
+
+                if (agent.velocity.magnitude >= 0.1 || playerBody.velocity.magnitude >= 0.1)
                 {
                     //Debug.Log("Movement1");
                     animator.SetBool("IsMoving", true);
                     MovingdirectionCheck();
                 }
 
-                else if(agent.velocity.magnitude < 0.1)
+                else if (agent.velocity.magnitude < 0.1 || playerBody.velocity.magnitude < 0.1)
                 {
                     //Debug.Log("Movement2");
                     animator.SetBool("IsMoving", false);
