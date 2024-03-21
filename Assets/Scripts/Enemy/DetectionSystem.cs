@@ -49,8 +49,8 @@ public class DetectionSystem : MonoBehaviour
         fieldOfView = GetComponentInChildren<FieldOfView>();
         enemyManager = GetComponent<EnemyManager>();
         enemyMovement = GetComponent<EnemyMovement>();
-        AudioManager = GameObject.Find("AudioManager");
-        BackgroundMusic = AudioManager.GetComponent<BackgroundMusic>();
+        //AudioManager = GameObject.Find("AudioManager");
+        //BackgroundMusic = AudioManager.GetComponent<BackgroundMusic>();
     }
 
     private void Update()
