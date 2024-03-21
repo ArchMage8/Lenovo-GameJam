@@ -37,7 +37,7 @@ public class CharacterAnimationController : MonoBehaviour
                     MovingdirectionCheck();
                 }
 
-                else if (agent.velocity.magnitude < 0.1 || playerBody.velocity.magnitude < 0.1)
+                else if (agent.velocity.magnitude < 0.1 || playerBody.velocity.magnitude < 0.15)
                 {
                     //Debug.Log("Movement2");
                     animator.SetBool("IsMoving", false);
