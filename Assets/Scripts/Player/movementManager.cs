@@ -5,21 +5,21 @@ using UnityEngine.InputSystem;
 
 public class movementManager : MonoBehaviour
 {
-    [SerializeField] openMap openMap;
+    [HideInInspector] public openMap openMap;
     private PlayerControls input = null;
     private Vector2 moveVector = Vector2.zero;
     private Vector2 aimVector = Vector2.zero;
     
-    public GameObject player;
-    public GameObject target;
+    [HideInInspector] public GameObject target;
+    [HideInInspector] public GameObject player;
 
     private Vector2 mousePosition;
     private Vector2 lastMousePosition;
-    public Rigidbody2D rb;
-    
+    [HideInInspector] public Rigidbody2D rb;
+    [Header("Adjust Player Speed")]
     public float speed = 5f;
 
-    public bool usingController;
+    [HideInInspector] public bool usingController;
 
     private EnemyManager enemyManager;
 
@@ -86,7 +86,9 @@ public class movementManager : MonoBehaviour
     }
 
     void Start(){
+        player = GameObject.FindWithTag("Player");
         target = player;
+        openMap = GetComponent<openMap>();
     }
 
     void FixedUpdate()

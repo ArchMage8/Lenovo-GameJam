@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class BackgroundMusic : MonoBehaviour
 {
-    public bool ChasingMusic = false;
-    public float audiofade = 5f;
+    [HideInInspector]public bool ChasingMusic = false;
+    [Header("Adjust Transition Speed ( Lower = Smoother )")] 
+    [Range(0.01f, 2f)]public float audiofade = 5f;
     public AudioSource ChaseMusic;
     public AudioSource SneakMusic;
 

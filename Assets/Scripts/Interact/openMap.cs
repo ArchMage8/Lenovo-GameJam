@@ -6,7 +6,8 @@ using UnityEngine.InputSystem;
 public class openMap : MonoBehaviour
 {
     private PlayerControls input = null;
-    public bool mapOpen = false;
+    [HideInInspector] public bool mapOpen = false;
+    [Header("Drag Map Game Object Here")]
     public GameObject map;
     private void Awake() 
     {

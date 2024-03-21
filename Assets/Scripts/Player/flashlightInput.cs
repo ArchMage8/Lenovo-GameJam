@@ -6,17 +6,19 @@ using UnityEngine.Rendering.Universal;
 
 public class flashlightInput : MonoBehaviour
 {
+    [Header("Drag FOV Prefab Inside the Player Prefab Here")]
     [SerializeField] PlayerFOV fieldOfView;
 
     private EnemyManager enemymanager;
 
-    public GameObject player;
+    
+    [HideInInspector] public GameObject player;
 
-    public GameObject flashlightobject;
+    [HideInInspector] public GameObject flashlightobject;
 
     private PlayerControls input = null;
 
-    public bool flashlight;
+    [HideInInspector] public bool flashlight;
 
     private void Awake() 
     {

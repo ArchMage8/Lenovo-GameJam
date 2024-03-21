@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class mindControl : MonoBehaviour
 {
-    [SerializeField] PlayerFOV fieldOfView;
+    [HideInInspector] public PlayerFOV fieldOfView;
     [SerializeField] movementManager movementmanager;
 
     private EnemyManager enemymanager;
@@ -61,7 +61,7 @@ public class mindControl : MonoBehaviour
     
     void Start(){
         movementmanager.target = movementmanager.player;
-        fieldOfView = this.GetComponent<PlayerFOV>();
+        fieldOfView = GetComponent<PlayerFOV>();
     }
 
     void FixedUpdate()

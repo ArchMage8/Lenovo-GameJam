@@ -6,12 +6,12 @@ using UnityEngine.AI;
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField] FieldOfView fieldOfView;
-    public bool isPossessed;
+    [HideInInspector] public bool isPossessed;
     public Vector3 initialPosition;
     private NavMeshAgent agent;
     private DetectionSystem detectionSystem;
-    public bool isChasing;
-    public bool isPatrolling = true;
+    [HideInInspector] public bool isChasing;
+    [HideInInspector] public bool isPatrolling = true;
 
     private void Awake()
     {

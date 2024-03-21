@@ -6,12 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class MenuInput : MonoBehaviour
 {
+    [Header("Drag Pause Prefab Here")]
     [SerializeField] GameObject Menu;
+    
     private GameObject MovementGameObject;
     private GameObject Player;
     private movementManager MovementManager;
     private PlayerControls input = null;
-    public bool menuOpen = false;
+    [HideInInspector] public bool menuOpen = false;
     private void Awake() 
     {
         input = new PlayerControls();

@@ -20,7 +20,7 @@ public class DetectionSystem : MonoBehaviour
 
     [SerializeField] private float chaseDuration = 5f;
     [SerializeField] private float waitDuration = 5f;
-    public BackgroundMusic BackgroundMusic;
+    [HideInInspector] public BackgroundMusic BackgroundMusic;
     private GameObject AudioManager;
     private GameObject Target;
     private Vector2 tempPlayerPos;
@@ -49,8 +49,8 @@ public class DetectionSystem : MonoBehaviour
         fieldOfView = GetComponentInChildren<FieldOfView>();
         enemyManager = GetComponent<EnemyManager>();
         enemyMovement = GetComponent<EnemyMovement>();
-        //AudioManager = GameObject.Find("AudioManager");
-        //BackgroundMusic = AudioManager.GetComponent<BackgroundMusic>();
+        AudioManager = GameObject.Find("AudioManager");
+        BackgroundMusic = AudioManager.GetComponent<BackgroundMusic>();
     }
 
     private void Update()
