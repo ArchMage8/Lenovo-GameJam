@@ -1409,7 +1409,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1977652424}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae5f3b4857ca2fa429fa020652579e1b, type: 3}
   m_Name: 
@@ -1751,6 +1751,8 @@ MonoBehaviour:
   movementmanager: {fileID: 0}
   maxDistance: 50
   isMindControl: 0
+  ToggleControl: {fileID: 0}
+  ToggleVolume: 0
 --- !u!212 &3328026515639708350
 SpriteRenderer:
   m_ObjectHideFlags: 0
