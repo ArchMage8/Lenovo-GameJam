@@ -88,10 +88,8 @@ public class DoorSystem : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.name);
-        if (collision.tag == canInteract.ToString() && collision.GetComponent<EnemyManager>().isPossessed)
+        if (collision.tag == canInteract.ToString())
         {
-            Debug.Log("it work");
             interacting = true;
             InteractText.SetActive(true);
         }
@@ -99,7 +97,7 @@ public class DoorSystem : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == canInteract.ToString() && collision.GetComponent<EnemyManager>().isPossessed)
+        if (collision.tag == canInteract.ToString())
         {
             interacting = false;
             InteractText.SetActive(false);

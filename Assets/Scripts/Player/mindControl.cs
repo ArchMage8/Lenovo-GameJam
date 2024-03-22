@@ -14,11 +14,6 @@ public class mindControl : MonoBehaviour
     private PlayerControls input = null;
 
     public bool isMindControl;
-    public bool range90 = false;
-    public bool range70 = false;
-
-
-
     public AudioClip ToggleControl;
     public float ToggleVolume;
 
@@ -44,7 +39,7 @@ public class mindControl : MonoBehaviour
         if (!isMindControl && fieldOfView.targetObject != null)
         { 
             if(!enemymanager.isChasing){
-                // SoundManager.instance.PlaySound(ToggleControl, ToggleVolume);
+                SoundManager.instance.PlaySound(ToggleControl, ToggleVolume);
                 movementmanager.rb.velocity = new Vector2(0, 0);
                 movementmanager.target.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
                 
@@ -62,7 +57,7 @@ public class mindControl : MonoBehaviour
         }
         else if (isMindControl)
         {
-            // SoundManager.instance.PlaySound(ToggleControl, ToggleVolume);
+            SoundManager.instance.PlaySound(ToggleControl, ToggleVolume);
             backToPlayer();
         }
     }
@@ -98,26 +93,9 @@ public class mindControl : MonoBehaviour
 
     void rangeLimit(){
         float distance = Vector2.Distance(movementmanager.target.transform.position, movementmanager.player.transform.position);
+
         // Debug.Log(distance);
-        // Debug.Log(distance);
-        if(distance > maxDistance * (90f / 100f))
-        {
-            // Debug.Log("90%");
-            range90 = true;
-        }
-        else
-        {
-            range90 = false;
-        }
-        if(distance > maxDistance * (70f / 100f))
-        {
-            // Debug.Log("70%");
-            range70 = true;
-        }
-        else
-        {
-            range70 = false;
-        }
+
         if(maxDistance < distance){
             backToPlayer();
         }
