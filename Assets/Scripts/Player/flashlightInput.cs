@@ -8,6 +8,8 @@ public class flashlightInput : MonoBehaviour
 {
     [Header("Drag FOV Prefab Inside the Player Prefab Here")]
     [SerializeField] PlayerFOV fieldOfView;
+    public float lightIntensityOn;
+    public float lightIntensityOff;
 
     private EnemyManager enemymanager;
 
@@ -15,6 +17,8 @@ public class flashlightInput : MonoBehaviour
     [HideInInspector] public GameObject player;
 
     [HideInInspector] public GameObject flashlightobject;
+
+    [HideInInspector] public GameObject flashlightcircleobject;
 
     private PlayerControls input = null;
 
@@ -42,22 +46,23 @@ public class flashlightInput : MonoBehaviour
     }
     void Start()
     {
-        player = GameObject.FindWithTag("Player");
+        player = GameObject.Find("Player");
         flashlightobject = GameObject.Find("PlayerFlashlight");
+        flashlightcircleobject = GameObject.Find("PlayerCircleLight");
     }
     void Update()
     {
         if(flashlight){
-            flashlightobject.GetComponent<Light2D>().intensity = 1.59f;
+            flashlightobject.GetComponent<Light2D>().intensity = lightIntensityOn;
+            flashlightcircleobject.GetComponent<Light2D>().intensity = lightIntensityOn;
         }
         else{
-            flashlightobject.GetComponent<Light2D>().intensity = 0.5f;
+            flashlightobject.GetComponent<Light2D>().intensity = lightIntensityOff;
+            O
         }
         if(flashlight && fieldOfView.targetObject != null){
             fieldOfView.targetObject.GetComponent< EnemyMovement>().Transform_Movement(player.GetComponent<Transform>());
             fieldOfView.targetObject.GetComponent<EnemyManager>().isPatrolling = false;
-
-            // fieldOfView.targetObject.GetComponent<DetectionSystem>().chasingPlayer();
         }
     }
 }
