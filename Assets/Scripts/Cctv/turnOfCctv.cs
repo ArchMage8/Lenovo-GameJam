@@ -1,72 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class turnOfCctv : MonoBehaviour
+public class GameObjectArrayExample : MonoBehaviour
 {
-    public enum TargetTags
-    {
-        Janitor,
-        Guard,
-        Scientist,
-        IT
-    }
-    public TargetTags canInteract;
-
+    public bool test = false;
     [SerializeField]
     private GameObject[] targetGameObjects;
     
-    private PlayerControls input = null;
 
-    private bool interacting;
-    public AudioClip CCTVoff;
-    public float CCTVvolume;
-
-    private void Awake() 
+    void Start()
     {
-        input = new PlayerControls();
-    }
+        
 
-    private void OnEnable() 
-    {
-        input.Enable();
-        input.Control.interact.performed += OnInteractPerformed;
     }
-
-    private void OnDisable()
-    {
-        input.Disable();
-        input.Control.interact.performed -= OnInteractPerformed;
-    }
-    private void OnInteractPerformed(InputAction.CallbackContext context)
-    {   
-        if(interacting){
+    void Update(){
+        if(test){
             foreach (GameObject obj in targetGameObjects)
             {
                 if (obj != null)
                 {
                     obj.GetComponent<cctvMovement>().cctvOn = false;
-                    SoundManager.instance.PlaySound(CCTVoff, CCTVvolume);
                 }
             }
-        }
-    }
-
-    
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == canInteract.ToString())
-        {
-            interacting = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == canInteract.ToString())
-        {
-            interacting = false;
+            test = false;
         }
     }
 }
