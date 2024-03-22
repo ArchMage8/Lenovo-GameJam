@@ -304,9 +304,9 @@ MonoBehaviour:
   ClosedVisual: {fileID: 7453336873922815334}
   OpenedVisual: {fileID: 18140752429516758}
   InteractText: {fileID: 0}
-  remote: 0
-  RemoteOpen: {fileID: 0}
-  RemoteVolume: 0
+  remote: 1
+  RemoteOpen: {fileID: 8300000, guid: cb09d88739ae5cd4280da76f0c582b53, type: 3}
+  RemoteVolume: 0.5
   DirectOpen: {fileID: 0}
   DirectVolume: 0
 --- !u!1 &7453336873922815334

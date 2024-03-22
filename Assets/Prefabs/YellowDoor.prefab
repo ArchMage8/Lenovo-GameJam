@@ -392,8 +392,8 @@ MonoBehaviour:
   remote: 0
   RemoteOpen: {fileID: 0}
   RemoteVolume: 0
-  DirectOpen: {fileID: 0}
-  DirectVolume: 0
+  DirectOpen: {fileID: 8300000, guid: 64ea23f38f20992478ba745e4d8df65e, type: 3}
+  DirectVolume: 0.5
 --- !u!1 &8334668822494605271
 GameObject:
   m_ObjectHideFlags: 0

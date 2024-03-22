@@ -146,5 +146,5 @@ MonoBehaviour:
   canInteract: 3
   targetGameObjects:
   - {fileID: 0}
-  CCTVoff: {fileID: 0}
-  CCTVvolume: 0
+  CCTVoff: {fileID: 8300000, guid: 39e9400c2d10d3444a485e8bf680657c, type: 3}
+  CCTVvolume: 0.8

@@ -132,8 +132,8 @@ MonoBehaviour:
   movementmanager: {fileID: 0}
   maxDistance: 50
   isMindControl: 0
-  ToggleControl: {fileID: 0}
-  ToggleVolume: 0
+  ToggleControl: {fileID: 8300000, guid: 69e18cf9031a30c4f8c2198cf3f67000, type: 3}
+  ToggleVolume: 0.7
 --- !u!114 &4479590580590174662
 MonoBehaviour:
   m_ObjectHideFlags: 0
