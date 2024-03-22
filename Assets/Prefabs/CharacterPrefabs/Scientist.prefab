@@ -240,14 +240,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7355447686485720525, guid: c2973fd9824e1c049808094473ed0301, type: 3}
-      propertyPath: m_Offset.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7355447686485720525, guid: c2973fd9824e1c049808094473ed0301, type: 3}
-      propertyPath: m_Offset.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8871939834970494963, guid: c2973fd9824e1c049808094473ed0301, type: 3}
       propertyPath: m_Name
       value: Scientist
