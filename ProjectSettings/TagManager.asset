@@ -46,29 +46,8 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: background
-    uniqueID: 2691181791
-    locked: 0
   - name: floor
     uniqueID: 1316710193
-    locked: 0
-  - name: walls
-    uniqueID: 2041406127
-    locked: 0
-  - name: NPC
-    uniqueID: 126736459
-    locked: 0
-  - name: Player
-    uniqueID: 2481927937
-    locked: 0
-  - name: wallTop
-    uniqueID: 486817493
-    locked: 0
-  - name: WallTopOverlay
-    uniqueID: 3258126809
-    locked: 0
-  - name: Shadow
-    uniqueID: 1309156957
     locked: 0
   - name: Map
     uniqueID: 452787021

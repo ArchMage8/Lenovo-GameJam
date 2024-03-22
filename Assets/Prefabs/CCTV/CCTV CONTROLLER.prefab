@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3522999968171399682}
   - component: {fileID: 7780834596552204903}
   - component: {fileID: 6254203691153794127}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CCTV CONTROLLER
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4007613500208402962}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1

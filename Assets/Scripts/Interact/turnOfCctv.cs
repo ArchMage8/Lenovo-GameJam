@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class turnOffCctv : MonoBehaviour
+public class turnOfCctv : MonoBehaviour
 {
     public enum TargetTags
     {
