@@ -111,7 +111,7 @@ public class DetectionSystem : MonoBehaviour
         else
         {   
             if(enemyManager.isChasing && Target == null && !hunting){
-                BackgroundMusic.ChasingMusic = false;
+                
                 Debug.Log("player lose line of sight");
                 enemyManager.isChasing = false;
                 StartCoroutine(Timer());
@@ -182,6 +182,7 @@ public class DetectionSystem : MonoBehaviour
             enemyManager.isPatrolling = true;
             isChasingPlayer = false;
             test = false;
+            BackgroundMusic.ChasingMusic = false;
         }
     }
 }

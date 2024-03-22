@@ -21,31 +21,34 @@ public class BackgroundMusic : MonoBehaviour
     {
         if (ChasingMusic)
         {
+            if (ChaseMusic.volume >= 0)
+            {
+                ChaseMusic.volume -= OutAudiofade;
+            }
             if(!SneakMusic.isPlaying)
             {
                 SneakMusic.Play();
             }
-            isPlaying = true;   
-            if (SneakMusic.volume <= 1)
-            {
+            if(ChaseMusic.volume <= 0.1 && SneakMusic.volume <= 1){
                 isPlaying = true;   
                 SneakMusic.volume += InAudiofade;
-                ChaseMusic.volume -= OutAudiofade;
+                ChaseMusic.Stop();
             }
-            ChaseMusic.Stop();
         }
         else
         {
             if (SneakMusic.volume >= 0)
             {
-                if(!ChaseMusic.isPlaying)
-                {
-                    ChaseMusic.Play();
-                }
-                SneakMusic.volume -= InAudiofade;
-                ChaseMusic.volume += OutAudiofade;
-                SneakMusic.Stop();
+                SneakMusic.volume -= OutAudiofade;
+            }
+            if(!ChaseMusic.isPlaying)
+            {
+                ChaseMusic.Play();
+            }
+            if(SneakMusic.volume <= 0.1 && ChaseMusic.volume <= 1){
                 isPlaying = false;
+                ChaseMusic.volume += InAudiofade;
+                SneakMusic.Stop();
             }
         }
 
@@ -55,6 +58,6 @@ public class BackgroundMusic : MonoBehaviour
         }
         
 
-        }
+  }
 }
 
