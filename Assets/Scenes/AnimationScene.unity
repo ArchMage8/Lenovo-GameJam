@@ -408,7 +408,7 @@ Animator:
   m_GameObject: {fileID: 953395295}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fff6353476601eb4499aad4495eeb621, type: 2}
+  m_Controller: {fileID: 9100000, guid: 81cfc2e5cf7809e4b9c25543b92f2241, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -490,13 +490,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 953395295}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae5f3b4857ca2fa429fa020652579e1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   direction_transform: {fileID: 0}
-  animator: {fileID: 1298608949}
+  animator: {fileID: 0}
 --- !u!1 &1019895642
 GameObject:
   m_ObjectHideFlags: 0
@@ -835,7 +835,6 @@ GameObject:
   - component: {fileID: 1298608943}
   - component: {fileID: 1298608942}
   - component: {fileID: 1298608941}
-  - component: {fileID: 1298608949}
   m_Layer: 7
   m_Name: Scientist
   m_TagString: Untagged
@@ -1014,27 +1013,6 @@ Transform:
   - {fileID: 1019895643}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &1298608949
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1298608939}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 81cfc2e5cf7809e4b9c25543b92f2241, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1531092944
 GameObject:
   m_ObjectHideFlags: 0
@@ -1843,6 +1821,10 @@ PrefabInstance:
     - target: {fileID: 7571838503215669571, guid: 8693509fdcbaa3b448d1f52317815bd1, type: 3}
       propertyPath: m_Name
       value: 'Player '
+      objectReference: {fileID: 0}
+    - target: {fileID: 7571838503215669571, guid: 8693509fdcbaa3b448d1f52317815bd1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
