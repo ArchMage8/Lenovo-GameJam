@@ -406,6 +406,11 @@ MonoBehaviour:
   ClosedVisual: {fileID: 8334668822494605271}
   OpenedVisual: {fileID: 6554859139624272832}
   InteractText: {fileID: 0}
+  remote: 0
+  RemoteOpen: {fileID: 0}
+  RemoteVolume: 0
+  DirectOpen: {fileID: 0}
+  DirectVolume: 0
 --- !u!1 &8334668822494605271
 GameObject:
   m_ObjectHideFlags: 0
