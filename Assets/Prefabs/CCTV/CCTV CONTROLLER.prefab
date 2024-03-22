@@ -143,6 +143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc270a2eb2d4a94ebef4e692ce55a3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  test: 0
+  canInteract: 3
   targetGameObjects:
   - {fileID: 0}
+  CCTVoff: {fileID: 0}
+  CCTVvolume: 0
