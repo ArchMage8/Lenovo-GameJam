@@ -402,7 +402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b8a6c7d5f48b64497d1846d6a7a76e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canInteract: 2
+  canInteract: 4
   ClosedVisual: {fileID: 7260435668062261303}
   OpenedVisual: {fileID: 1989165111476698174}
   InteractText: {fileID: 0}
