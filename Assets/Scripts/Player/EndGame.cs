@@ -8,6 +8,8 @@ public class EndGame : MonoBehaviour
 
     [SerializeField] private int winIndex;
     [SerializeField] private int deathIndex;
+
+
     
 
     private void Win()
@@ -18,6 +20,8 @@ public class EndGame : MonoBehaviour
     private void Death()
     {
         SceneManager.LoadScene(deathIndex);
+
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

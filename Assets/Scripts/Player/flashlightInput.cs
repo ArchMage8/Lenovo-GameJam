@@ -58,7 +58,7 @@ public class flashlightInput : MonoBehaviour
         }
         else{
             flashlightobject.GetComponent<Light2D>().intensity = lightIntensityOff;
-            O
+            
         }
         if(flashlight && fieldOfView.targetObject != null){
             fieldOfView.targetObject.GetComponent< EnemyMovement>().Transform_Movement(player.GetComponent<Transform>());
