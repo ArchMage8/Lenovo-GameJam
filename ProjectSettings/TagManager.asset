@@ -9,6 +9,7 @@ TagManager:
   - Scientist
   - IT
   - CCTV
+  - Win
   layers:
   - Default
   - TransparentFX

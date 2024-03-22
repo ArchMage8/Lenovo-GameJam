@@ -51,9 +51,13 @@ public class TutorialHandler : MonoBehaviour
     
     private IEnumerator nextScene()
     {
-        animator.SetTrigger("EndScene");
-        yield return new WaitForSeconds(1.5f);
-        SceneManager.LoadScene(targetIndex);
+        
+            yield return new WaitForSeconds(3f);
+            
+            animator.SetTrigger("EndScene");
+            yield return new WaitForSeconds(1.5f);
+            SceneManager.LoadScene(targetIndex);
+        
     }
     
     private IEnumerator Timer()
@@ -62,5 +66,6 @@ public class TutorialHandler : MonoBehaviour
         canChange = true;
         pressText.SetActive(true);
     }
+
     
 }

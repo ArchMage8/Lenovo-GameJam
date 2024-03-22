@@ -12,4 +12,9 @@ public class SceneNavigator : MonoBehaviour
     {
         SceneManager.LoadScene(sceneDestination);
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }

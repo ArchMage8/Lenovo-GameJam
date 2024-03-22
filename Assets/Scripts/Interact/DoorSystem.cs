@@ -84,14 +84,14 @@ public class DoorSystem : MonoBehaviour
         OpenedVisual.SetActive(false);
         TriggerCollider = GetComponent<BoxCollider2D>();
         doorMesh = GetComponentInParent<NavMeshObstacle>();
-        InteractText.SetActive(false) ;
+        
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == canInteract.ToString())
         {
             interacting = true;
-            InteractText.SetActive(true);
+            
         }
     }
 
@@ -100,7 +100,7 @@ public class DoorSystem : MonoBehaviour
         if (collision.tag == canInteract.ToString())
         {
             interacting = false;
-            InteractText.SetActive(false);
+            
         }
     }
 

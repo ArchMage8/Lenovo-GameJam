@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class mindControl : MonoBehaviour
 {
-    [HideInInspector] public PlayerFOV fieldOfView;
+    public PlayerFOV fieldOfView;
     [SerializeField] movementManager movementmanager;
 
     private EnemyManager enemymanager;
@@ -17,7 +18,8 @@ public class mindControl : MonoBehaviour
     public AudioClip ToggleControl;
     public float ToggleVolume;
 
-    // public image image;
+
+    public Image image;
 
     private void Awake() 
     {
@@ -41,8 +43,9 @@ public class mindControl : MonoBehaviour
         if (!isMindControl && fieldOfView.targetObject != null)
         { 
             if(!enemymanager.isChasing){
-                SoundManager.instance.PlaySound(ToggleControl, ToggleVolume);
+                //SoundManager.instance.PlaySound(ToggleControl, ToggleVolume);
                 movementmanager.rb.velocity = new Vector2(0, 0);
+                movementmanager.rb.angularVelocity = 0;
                 movementmanager.target.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
                 
                 
@@ -59,17 +62,16 @@ public class mindControl : MonoBehaviour
         }
         else if (isMindControl)
         {
-            SoundManager.instance.PlaySound(ToggleControl, ToggleVolume);
+            //SoundManager.instance.PlaySound(ToggleControl, ToggleVolume);
             backToPlayer();
         }
     }
     
     void Start(){
         movementmanager.target = movementmanager.player;
-        fieldOfView = GetComponent<PlayerFOV>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         //asign enemy manager if player detect other NPC within FOV range
         if(fieldOfView.targetObject != null){  
@@ -81,6 +83,7 @@ public class mindControl : MonoBehaviour
 
     void backToPlayer(){
         movementmanager.rb.velocity = new Vector2(0, 0);
+        movementmanager.rb.angularVelocity = 0;
         movementmanager.target.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
 
         isMindControl = false;
@@ -95,7 +98,10 @@ public class mindControl : MonoBehaviour
 
     void rangeLimit(){
         float distance = Vector2.Distance(movementmanager.target.transform.position, movementmanager.player.transform.position);
-        // image.color = ()
+
+        float persentage = distance / maxDistance;
+        Debug.Log(distance);
+        image.color = new Color(image.color.r, image.color.g, image.color.b, persentage );
         // Debug.Log(distance);
 
         if(maxDistance < distance){

@@ -138,7 +138,7 @@ public class CharacterAnimationController : MonoBehaviour
             zRotation -= 360f;
         }
 
-        Debug.Log(zRotation);
+        //Debug.Log(zRotation);
 
         return zRotation >= rangeStart && zRotation <= rangeEnd;
     }

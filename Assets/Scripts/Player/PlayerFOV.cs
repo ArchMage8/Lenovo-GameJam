@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.SearchService;
+
 using UnityEngine;
 
 public class PlayerFOV : MonoBehaviour
@@ -84,24 +83,7 @@ public class PlayerFOV : MonoBehaviour
 
 
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.white;
-        UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.forward, radius);
-
-        Vector3 angle01 = DirectionFromAngle(-transform.eulerAngles.z, -angle / 2);
-        Vector3 angle02 = DirectionFromAngle(-transform.eulerAngles.z, angle / 2);
-
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(transform.position, transform.position + angle01 * radius);
-        Gizmos.DrawLine(transform.position, transform.position + angle02 * radius);
-
-        if (CanSeeTarget)
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawLine(transform.position, targetObject.transform.position);
-        }
-    }
+   
 
     private Vector2 DirectionFromAngle(float eulerY, float angleInDegrees)
     {

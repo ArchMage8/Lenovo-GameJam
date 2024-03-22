@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class cctvMovement : MonoBehaviour
 {
@@ -31,7 +32,7 @@ public class cctvMovement : MonoBehaviour
             rotationMovement();
             // rb.angularVelocity = speed;
             if(fieldOfView.targetObject != null){
-                Debug.Log("player detected, dead");
+                Death();
             }
         }
         else{
@@ -63,5 +64,12 @@ public class cctvMovement : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         rb.angularVelocity = -speed;
         turningRight = true;
+    }
+    
+    private void Death()
+    {
+        SceneManager.LoadScene(10);
+
+
     }
 }

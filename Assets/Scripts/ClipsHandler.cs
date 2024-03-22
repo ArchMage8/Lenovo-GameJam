@@ -9,6 +9,7 @@ public class ClipsHandler : MonoBehaviour
     private bool canChange = false;
     [SerializeField] private int targetIndex;
     [SerializeField] private bool auto;
+    [SerializeField] private float autoDuration = 1f;
 
     [SerializeField] private GameObject PressText;
     [SerializeField] private Animator animator;
@@ -49,7 +50,7 @@ public class ClipsHandler : MonoBehaviour
 
     private IEnumerator AutoTimer()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(autoDuration);
         StartCoroutine(NextScene());
     }
     

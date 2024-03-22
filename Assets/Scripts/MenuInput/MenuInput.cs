@@ -14,6 +14,8 @@ public class MenuInput : MonoBehaviour
     private movementManager MovementManager;
     [HideInInspector] public bool menuOpen = false;
     private PlayerControls input = null;
+
+    [SerializeField] private Animator animator;
     private void Awake() 
     {
         input = new PlayerControls();
@@ -38,7 +40,7 @@ public class MenuInput : MonoBehaviour
     void Start()
     {
         Menu.SetActive(false);
-        MovementGameObject = GameObject.Find("MovementManager");
+        MovementGameObject = GameObject.Find("Movement manager");
         Player = GameObject.FindWithTag("Player");
     }
 
@@ -64,6 +66,14 @@ public class MenuInput : MonoBehaviour
     }
     public void BacktoMenu()
     {
+        StartCoroutine(AnimDelay());
+    }
+
+    private IEnumerator AnimDelay()
+    {
+        animator.SetTrigger("EndScene");
+        yield return new WaitForSeconds(1.5f);
+        
         Time.timeScale = 1f;
         Debug.Log("Change Scene to menu");
         SceneManager.LoadScene(0);

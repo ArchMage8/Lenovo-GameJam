@@ -9,7 +9,7 @@ public class EndGame : MonoBehaviour
     [SerializeField] private int winIndex;
     [SerializeField] private int deathIndex;
 
-
+    [SerializeField] private Animator animator;
     
 
     private void Win()
@@ -28,12 +28,27 @@ public class EndGame : MonoBehaviour
     {
         if (collision.CompareTag("Win"))
         {
-            Win();
+            StartCoroutine(WinScene());
         }
-        else if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy") && !collision.GetComponent<EnemyManager>().isPossessed)
         {
-            Death();
+            StartCoroutine(DeathScene());   
         }
     }
 
+    private IEnumerator WinScene()
+    {
+        animator.SetTrigger("EndScene");
+        yield return new WaitForSeconds(1.5f);
+
+        Win();
+    }
+
+    private IEnumerator DeathScene()
+    {
+        animator.SetTrigger("EndScene");
+        yield return new WaitForSeconds(0.1f);
+
+        Death();
+    }
 }

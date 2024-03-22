@@ -1171,7 +1171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8569f3ae646ad5b468733a95e541c6a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneDestination: 0
+  sceneDestination: 7
 --- !u!114 &1602805877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1574,7 +1574,7 @@ MonoBehaviour:
   - {fileID: 778964759}
   - {fileID: 1142232745}
   animator: {fileID: 1343896323}
-  targetIndex: 0
+  targetIndex: 7
   pressText: {fileID: 1070040829}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

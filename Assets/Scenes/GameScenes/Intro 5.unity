@@ -750,6 +750,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba35ed49b8530b14ca5e747d2f94f19d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetIndex: 6
+  auto: 0
+  autoDuration: 1
   PressText: {fileID: 1678798951}
   animator: {fileID: 1049197448}
 --- !u!1660057539 &9223372036854775807
