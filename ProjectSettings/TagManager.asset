@@ -64,6 +64,9 @@ TagManager:
   - name: wallTop
     uniqueID: 486817493
     locked: 0
+  - name: WallTopOverlay
+    uniqueID: 3258126809
+    locked: 0
   - name: Shadow
     uniqueID: 1309156957
     locked: 0
