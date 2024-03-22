@@ -17,6 +17,8 @@ public class mindControl : MonoBehaviour
     public AudioClip ToggleControl;
     public float ToggleVolume;
 
+    // public image image;
+
     private void Awake() 
     {
         input = new PlayerControls();
@@ -93,7 +95,7 @@ public class mindControl : MonoBehaviour
 
     void rangeLimit(){
         float distance = Vector2.Distance(movementmanager.target.transform.position, movementmanager.player.transform.position);
-
+        // image.color = ()
         // Debug.Log(distance);
 
         if(maxDistance < distance){
