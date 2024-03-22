@@ -16,7 +16,8 @@ public class DoorSystem : MonoBehaviour
         Janitor,
         Guard,
         Scientist,
-        IT
+        IT,
+        Player
     }
 
     public TargetTags canInteract;
