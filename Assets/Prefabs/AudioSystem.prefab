@@ -82,8 +82,8 @@ MonoBehaviour:
   OutAudiofade: 2
   ChaseMusic: {fileID: 6781833181613336344}
   SneakMusic: {fileID: 1121449492578698517}
-  ChaseTrigger: {fileID: 0}
-  volume: 0
+  ChaseTrigger: {fileID: 8300000, guid: bcd4610e5e3ba474eab0abe8df1a8f15, type: 3}
+  volume: 0.75
 --- !u!82 &6781833181613336344
 AudioSource:
   m_ObjectHideFlags: 0
